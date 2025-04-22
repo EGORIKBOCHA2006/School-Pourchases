@@ -12,9 +12,45 @@ namespace School_Pourchases
 {
     public partial class LoginView : UserControl
     {
-        public LoginView()
+        Container parentContainer;
+        public LoginView(Container parentContainer)
         {
+            this.parentContainer = parentContainer;
             InitializeComponent();
+        }
+
+
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+            if (schoolTb.Text!="" && passwordTb.Text!="")
+            {
+                parentContainer.appUser.SchoolName = schoolTb.Text;
+                parentContainer.contentPanel.Controls.Clear();
+                parentContainer.contentPanel.Dock = DockStyle.Right;
+                parentContainer.menuPanel.Visible = true;
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля","Ошибка",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
+        }
+
+        private void Register_Click(object sender, EventArgs e)
+        {
+            if (schoolTb.Text != "" && passwordTb.Text != "")
+            {
+                parentContainer.appUser.SchoolName = schoolTb.Text;
+                parentContainer.contentPanel.Controls.Clear();
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
