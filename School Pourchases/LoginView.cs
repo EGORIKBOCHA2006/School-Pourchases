@@ -23,7 +23,7 @@ namespace School_Pourchases
 
         private void Login_Click(object sender, EventArgs e)
         {
-            if (schoolTb.Text!="" && passwordTb.Text!="")
+            if (true)
             {
                 parentContainer.appUser.SchoolName = schoolTb.Text;
                 parentContainer.contentPanel.Controls.Clear();
@@ -41,7 +41,7 @@ namespace School_Pourchases
 
         private void Register_Click(object sender, EventArgs e)
         {
-            if (schoolTb.Text != "" && passwordTb.Text != "")
+            if (true)
             {
                 parentContainer.appUser.SchoolName = schoolTb.Text;
                 parentContainer.contentPanel.Controls.Clear();

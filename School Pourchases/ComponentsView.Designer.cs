@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listView1 = new ListView();
             checkedListBox = new CheckedListBox();
             sortTypeCb = new ComboBox();
             label1 = new Label();
@@ -37,16 +36,8 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            panelCatalog = new FlowLayoutPanel();
             SuspendLayout();
-            // 
-            // listView1
-            // 
-            listView1.Location = new Point(21, 136);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(504, 307);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.List;
             // 
             // checkedListBox
             // 
@@ -118,10 +109,21 @@
             label4.TabIndex = 6;
             label4.Text = "Категория:";
             // 
+            // panelCatalog
+            // 
+            panelCatalog.AutoScroll = true;
+            panelCatalog.FlowDirection = FlowDirection.TopDown;
+            panelCatalog.Location = new Point(14, 142);
+            panelCatalog.Name = "panelCatalog";
+            panelCatalog.Size = new Size(511, 292);
+            panelCatalog.TabIndex = 7;
+            panelCatalog.WrapContents = false;
+            // 
             // ComponentsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(panelCatalog);
             Controls.Add(label4);
             Controls.Add(lblCountItems);
             Controls.Add(lblSchoolName);
@@ -130,7 +132,6 @@
             Controls.Add(label1);
             Controls.Add(sortTypeCb);
             Controls.Add(checkedListBox);
-            Controls.Add(listView1);
             Name = "ComponentsView";
             Size = new Size(672, 450);
             ResumeLayout(false);
@@ -138,8 +139,6 @@
         }
 
         #endregion
-
-        private ListView listView1;
         private CheckedListBox checkedListBox;
         private ComboBox sortTypeCb;
         private Label label1;
@@ -148,5 +147,6 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private FlowLayoutPanel panelCatalog;
     }
 }
