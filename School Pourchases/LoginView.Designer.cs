@@ -33,8 +33,10 @@
             LoginPage = new TabPage();
             loginBtn = new Button();
             passwordTb = new TextBox();
+            responsibleTb = new TextBox();
             schoolTb = new TextBox();
             label2 = new Label();
+            label6 = new Label();
             label1 = new Label();
             RegisterPage = new TabPage();
             registerBtn = new Button();
@@ -76,8 +78,10 @@
             LoginPage.BackColor = SystemColors.ControlLightLight;
             LoginPage.Controls.Add(loginBtn);
             LoginPage.Controls.Add(passwordTb);
+            LoginPage.Controls.Add(responsibleTb);
             LoginPage.Controls.Add(schoolTb);
             LoginPage.Controls.Add(label2);
+            LoginPage.Controls.Add(label6);
             LoginPage.Controls.Add(label1);
             LoginPage.Location = new Point(4, 27);
             LoginPage.Name = "LoginPage";
@@ -94,7 +98,7 @@
             loginBtn.Location = new Point(11, 163);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(349, 37);
-            loginBtn.TabIndex = 2;
+            loginBtn.TabIndex = 4;
             loginBtn.Text = "Войти";
             loginBtn.UseVisualStyleBackColor = false;
             loginBtn.Click += Login_Click;
@@ -104,27 +108,43 @@
             passwordTb.Location = new Point(158, 113);
             passwordTb.Name = "passwordTb";
             passwordTb.Size = new Size(202, 23);
-            passwordTb.TabIndex = 1;
+            passwordTb.TabIndex = 3;
+            // 
+            // responsibleTb
+            // 
+            responsibleTb.Location = new Point(158, 73);
+            responsibleTb.Name = "responsibleTb";
+            responsibleTb.Size = new Size(202, 23);
+            responsibleTb.TabIndex = 2;
             // 
             // schoolTb
             // 
-            schoolTb.Location = new Point(158, 51);
+            schoolTb.Location = new Point(158, 36);
             schoolTb.Name = "schoolTb";
             schoolTb.Size = new Size(202, 23);
             schoolTb.TabIndex = 1;
             // 
             // label2
             // 
-            label2.Location = new Point(11, 113);
+            label2.Location = new Point(11, 112);
             label2.Name = "label2";
             label2.Size = new Size(107, 23);
             label2.TabIndex = 0;
             label2.Text = "Пароль";
             label2.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // label6
+            // 
+            label6.Location = new Point(11, 63);
+            label6.Name = "label6";
+            label6.Size = new Size(125, 40);
+            label6.TabIndex = 0;
+            label6.Text = "Имя пользователя";
+            label6.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // label1
             // 
-            label1.Location = new Point(9, 43);
+            label1.Location = new Point(11, 35);
             label1.Name = "label1";
             label1.Size = new Size(107, 23);
             label1.TabIndex = 0;
@@ -244,5 +264,7 @@
         private Label label5;
         private Label label4;
         private Button registerBtn;
+        private TextBox responsibleTb;
+        private Label label6;
     }
 }

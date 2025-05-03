@@ -3,12 +3,13 @@ using School_Pourchases.Models;
 namespace School_Pourchases
 {
 
+    
 
     public partial class Container : Form
     {
 
-
-        public User appUser= new User();
+        public User user;
+        
         public Container()
         {
             
@@ -18,8 +19,8 @@ namespace School_Pourchases
             LoginView loginView = new LoginView(this);
             loginView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(loginView);
-        
-            
+
+
         }
         private void caralogBtn_Click_1(object sender, EventArgs e)
         {
@@ -27,6 +28,7 @@ namespace School_Pourchases
             ComponentsView componentsView = new ComponentsView();
             componentsView.Dock= DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
+            
         }
     }
 }
