@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace School_Pourchases.Models
+{
+    public class User
+    {
+        public string SchoolName { get; set; }
+        public int UserId { get; set; }
+        public string TypeUser { get; set; }
+        public string UserName { get; set; }
+        public string TypeSchool { get; set; }
+
+
+        public User(int userId, string userName, string schoolName, string typeSchool, string typeUser )
+        {
+            UserId = userId;
+            UserName = userName;
+            SchoolName = schoolName;
+            TypeSchool = typeSchool;
+            TypeUser = typeUser;
+        }
+    }
+}

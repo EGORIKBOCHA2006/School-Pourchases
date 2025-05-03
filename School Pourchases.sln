@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School Pourchases", "School Pourchases\School Pourchases.csproj", "{0FADF78C-3391-468B-AFF1-7FDD61921CBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School Pourchases", "School Pourchases\School Pourchases.csproj", "{0FADF78C-3391-468B-AFF1-7FDD61921CBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testAsync", "testAsync\testAsync.csproj", "{7E79127E-8005-4DA9-8F5D-A22EF070DF2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0FADF78C-3391-468B-AFF1-7FDD61921CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FADF78C-3391-468B-AFF1-7FDD61921CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FADF78C-3391-468B-AFF1-7FDD61921CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E79127E-8005-4DA9-8F5D-A22EF070DF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E79127E-8005-4DA9-8F5D-A22EF070DF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E79127E-8005-4DA9-8F5D-A22EF070DF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E79127E-8005-4DA9-8F5D-A22EF070DF2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
