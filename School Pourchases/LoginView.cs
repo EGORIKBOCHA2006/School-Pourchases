@@ -19,6 +19,7 @@ namespace School_Pourchases
         {
             this.parentContainer = parentContainer;
             InitializeComponent();
+            typeSchoolCb.SelectedIndex = 1;
         }
 
 
@@ -44,7 +45,7 @@ namespace School_Pourchases
                     sqlCommand.Parameters.Add(sqlParameterResponsible);
                     sqlCommand.CommandText = "select Users.id, Users.name , Schools.name, TypesSchool.name, TypesUser.name\r\nfrom Users,Schools, TypesSchool, TypesUser\r\nwhere Users.name=@responsible and Users.password=@password and Schools.name=@nameSchool and Users.schoolId=Schools.id and TypesUser.id=Users.typeUser and Schools.typeId=TypesSchool.id\r\n";
                     SqlDataReader reader = sqlCommand.ExecuteReader();
-                    
+
                     if (reader.HasRows)
                     {
                         reader.Read();
@@ -65,16 +66,7 @@ namespace School_Pourchases
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-                if (true)
-                {
-
-                }
-                else
-                {
-                    MessageBox.Show("Заполните поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                finally { sqlConnection.Close(); }
             }
             else
             {
@@ -82,20 +74,73 @@ namespace School_Pourchases
             }
         }
 
-        private void Register_Click(object sender, EventArgs e)
+        private async void Register_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (schoolNameRegTb.Text!="" && passwordRegTb.Text!="" && responsibleRegTb.Text!="")
+
+            await sqlConnection.OpenAsync();
+            SqlParameter sqlParameterSchool = new SqlParameter("@nameSchool", System.Data.SqlDbType.VarChar);
+            SqlParameter sqlParameterPassword = new SqlParameter("@password", System.Data.SqlDbType.VarChar);
+            SqlParameter sqlParameterResponsible = new SqlParameter("@responsible", System.Data.SqlDbType.VarChar);
+            SqlParameter sqlParameterSchoolType = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
+            sqlParameterSchool.Value = schoolNameRegTb.Text;
+            sqlParameterPassword.Value = passwordRegTb.Text;
+            sqlParameterResponsible.Value = responsibleRegTb.Text;
+            sqlParameterSchoolType.Value=typeSchoolCb.SelectedIndex+1;
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.Parameters.Add(sqlParameterSchool);
+            sqlCommand.Parameters.Add(sqlParameterPassword);
+            sqlCommand.Parameters.Add(sqlParameterResponsible);
+            sqlCommand.Parameters.Add(sqlParameterSchoolType);
+            sqlCommand.CommandText = "select Users.id, Users.name , Schools.name, TypesSchool.name, TypesUser.name\r\nfrom Users,Schools, TypesSchool, TypesUser\r\nwhere Users.name=@responsible and Users.password=@password and Schools.name=@nameSchool and Schools.typeId=@typeSchool and Users.schoolId=Schools.id and TypesUser.id=Users.typeUser and Schools.typeId=TypesSchool.id\r\n";
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
             {
-                
-                parentContainer.contentPanel.Controls.Clear();
-                this.Dispose();
+                MessageBox.Show("Учетная запись уже существует");
+                reader.Close();
+                sqlConnection.Close();
             }
             else
             {
-                MessageBox.Show("Заполните поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+                reader.Close();
+                sqlCommand.CommandText = "select id, name from schools where name=@nameSchool and typeId=@typeSchool";
+                reader = sqlCommand.ExecuteReader();
+                SqlParameter sqlParametrIdSchool = new SqlParameter("@schoolId", System.Data.SqlDbType.Int);
+                if (reader.HasRows)
+                {
 
-       
+                    reader.Read();
+
+
+                    sqlParametrIdSchool.Value = (int)reader[0];
+                    sqlCommand.Parameters.Add(sqlParametrIdSchool);
+                    reader.Close();
+                    sqlCommand.CommandText = "insert into Users(name,password,schoolId, typeUser)  values (@responsible,@password,@schoolId,1)";
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+                }
+
+                else
+                {
+                    reader.Close();
+                    sqlCommand.CommandText = "insert into schools(name, typeId) values(@nameSchool, @typeSchool)";
+                    sqlCommand.ExecuteNonQuery();
+                    sqlCommand.CommandText = "select id from schools where name=@nameSchool";
+                    reader= sqlCommand.ExecuteReader();
+                    reader.Read();
+                    sqlParametrIdSchool.Value = (int)reader[0];
+                    reader.Close();
+                    sqlCommand.Parameters.Add(sqlParametrIdSchool);
+                    sqlCommand.CommandText = "insert into Users(name,password,schoolId, typeUser)  values (@responsible,@password,@schoolId,1)";
+                    await sqlCommand.ExecuteNonQueryAsync();
+                    reader.Close();
+                    sqlConnection.Close();
+                    MessageBox.Show("Учетная запись создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+
+        }
     }
 }
