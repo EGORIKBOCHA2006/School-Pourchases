@@ -25,7 +25,7 @@ namespace School_Pourchases
         private void caralogBtn_Click_1(object sender, EventArgs e)
         {
             contentPanel.Controls.Clear();
-            ComponentsView componentsView = new ComponentsView();
+            ComponentsView componentsView = new ComponentsView(this);
             componentsView.Dock= DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
             

@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            checkedListBox = new CheckedListBox();
             sortTypeCb = new ComboBox();
             label1 = new Label();
             lblSchoolName = new Label();
             label2 = new Label();
-            label3 = new Label();
             label4 = new Label();
             panelCatalog = new FlowLayoutPanel();
             panel3 = new Panel();
@@ -42,17 +40,12 @@
             label9 = new Label();
             lblCost = new Label();
             lblCountItems = new Label();
+            panel1 = new Panel();
+            label5 = new Label();
+            lblNameUser = new Label();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // checkedListBox
-            // 
-            checkedListBox.FormattingEnabled = true;
-            checkedListBox.Items.AddRange(new object[] { "Мониторы", "Процессоры", "Электронные доски", "Проекторы", "Экраны для проекторовОбучающие наборы" });
-            checkedListBox.Location = new Point(531, 142);
-            checkedListBox.Name = "checkedListBox";
-            checkedListBox.Size = new Size(138, 292);
-            checkedListBox.TabIndex = 1;
             // 
             // sortTypeCb
             // 
@@ -60,14 +53,14 @@
             sortTypeCb.FormattingEnabled = true;
             sortTypeCb.Location = new Point(74, 5);
             sortTypeCb.Name = "sortTypeCb";
-            sortTypeCb.Size = new Size(121, 23);
+            sortTypeCb.Size = new Size(152, 23);
             sortTypeCb.TabIndex = 2;
             sortTypeCb.Text = "Название категории";
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label1
             // 
-            label1.Location = new Point(21, 85);
+            label1.Location = new Point(13, 9);
             label1.Name = "label1";
             label1.Size = new Size(127, 15);
             label1.TabIndex = 3;
@@ -76,29 +69,20 @@
             // 
             // lblSchoolName
             // 
-            lblSchoolName.BackColor = SystemColors.ControlDark;
+            lblSchoolName.BackColor = Color.PapayaWhip;
             lblSchoolName.Location = new Point(531, 10);
             lblSchoolName.Name = "lblSchoolName";
-            lblSchoolName.Size = new Size(138, 90);
+            lblSchoolName.Size = new Size(141, 47);
             lblSchoolName.TabIndex = 4;
             // 
             // label2
             // 
-            label2.Location = new Point(404, 10);
+            label2.Location = new Point(447, 10);
             label2.Name = "label2";
-            label2.Size = new Size(121, 15);
+            label2.Size = new Size(78, 15);
             label2.TabIndex = 3;
             label2.Text = "Учреждение";
             label2.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            label3.Location = new Point(531, 124);
-            label3.Name = "label3";
-            label3.Size = new Size(138, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Выбранные категории:";
-            label3.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
@@ -116,7 +100,7 @@
             panelCatalog.FlowDirection = FlowDirection.TopDown;
             panelCatalog.Location = new Point(14, 142);
             panelCatalog.Name = "panelCatalog";
-            panelCatalog.Size = new Size(511, 292);
+            panelCatalog.Size = new Size(655, 292);
             panelCatalog.TabIndex = 7;
             panelCatalog.WrapContents = false;
             // 
@@ -128,9 +112,9 @@
             panel3.Controls.Add(OrderByCb);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(sortTypeCb);
-            panel3.Location = new Point(294, 71);
+            panel3.Location = new Point(438, 71);
             panel3.Name = "panel3";
-            panel3.Size = new Size(213, 68);
+            panel3.Size = new Size(231, 68);
             panel3.TabIndex = 8;
             // 
             // label8
@@ -138,9 +122,9 @@
             label8.AutoSize = true;
             label8.Location = new Point(5, 42);
             label8.Name = "label8";
-            label8.Size = new Size(66, 15);
+            label8.Size = new Size(35, 15);
             label8.TabIndex = 6;
-            label8.Text = "Категория:";
+            label8.Text = "Цена";
             // 
             // OrderByCb
             // 
@@ -148,23 +132,23 @@
             OrderByCb.FormattingEnabled = true;
             OrderByCb.Location = new Point(74, 38);
             OrderByCb.Name = "OrderByCb";
-            OrderByCb.Size = new Size(121, 23);
+            OrderByCb.Size = new Size(152, 23);
             OrderByCb.TabIndex = 2;
             OrderByCb.Text = "Название категории";
             OrderByCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label9
             // 
-            label9.Location = new Point(25, 118);
+            label9.Location = new Point(13, 42);
             label9.Name = "label9";
-            label9.Size = new Size(127, 15);
+            label9.Size = new Size(131, 15);
             label9.TabIndex = 3;
             label9.Text = "Примерная цена";
             label9.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblCost
             // 
-            lblCost.Location = new Point(158, 118);
+            lblCost.Location = new Point(146, 42);
             lblCost.Name = "lblCost";
             lblCost.Size = new Size(13, 15);
             lblCost.TabIndex = 5;
@@ -173,42 +157,68 @@
             // 
             // lblCountItems
             // 
-            lblCountItems.Location = new Point(158, 85);
+            lblCountItems.Location = new Point(146, 10);
             lblCountItems.Name = "lblCountItems";
             lblCountItems.Size = new Size(13, 15);
             lblCountItems.TabIndex = 5;
             lblCountItems.Text = "0";
             lblCountItems.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.PapayaWhip;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label9);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblCost);
+            panel1.Controls.Add(lblCountItems);
+            panel1.Location = new Point(14, 71);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(244, 68);
+            panel1.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.Location = new Point(202, 10);
+            label5.Name = "label5";
+            label5.Size = new Size(88, 15);
+            label5.TabIndex = 3;
+            label5.Text = "Пользователь";
+            label5.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblNameUser
+            // 
+            lblNameUser.BackColor = Color.PapayaWhip;
+            lblNameUser.Location = new Point(294, 10);
+            lblNameUser.Name = "lblNameUser";
+            lblNameUser.Size = new Size(147, 47);
+            lblNameUser.TabIndex = 4;
+            // 
             // ComponentsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
+            Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panelCatalog);
-            Controls.Add(lblCountItems);
-            Controls.Add(lblCost);
+            Controls.Add(lblNameUser);
             Controls.Add(lblSchoolName);
-            Controls.Add(label3);
+            Controls.Add(label5);
             Controls.Add(label2);
-            Controls.Add(label9);
-            Controls.Add(label1);
-            Controls.Add(checkedListBox);
             Name = "ComponentsView";
             Size = new Size(672, 450);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private CheckedListBox checkedListBox;
         private ComboBox sortTypeCb;
         private Label label1;
         private Label lblSchoolName;
         private Label label2;
-        private Label label3;
         private Label label4;
         private FlowLayoutPanel panelCatalog;
         private Panel panel3;
@@ -217,5 +227,8 @@
         private Label label9;
         private Label lblCost;
         private Label lblCountItems;
+        private Panel panel1;
+        private Label label5;
+        private Label lblNameUser;
     }
 }

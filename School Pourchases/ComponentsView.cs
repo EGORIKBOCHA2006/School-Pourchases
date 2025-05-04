@@ -14,15 +14,15 @@ namespace School_Pourchases
     {
         public void LoadItem(string name, double cost, string description)
         {
-        
+
             // 
             // itemPanel
             // 
             Panel tempItemPanel = new Panel();
             Button tempBtnAddToCart = new Button();
             Panel tempPanel2 = new Panel();
-            Label tempLblDescriptionItem= new Label();
-            Label  tempLblCostItem= new Label();
+            Label tempLblDescriptionItem = new Label();
+            Label tempLblCostItem = new Label();
             Label tempLblNameItem = new Label();
             PictureBox tempPictureItem = new PictureBox();
             panelCatalog.Controls.Add(tempItemPanel);
@@ -46,7 +46,7 @@ namespace School_Pourchases
             tempBtnAddToCart.TabIndex = 4;
             tempBtnAddToCart.Text = "Добавить";
             tempBtnAddToCart.UseVisualStyleBackColor = true;
-            tempBtnAddToCart.Click += btnAddToCart_Click;
+            
             // 
             // panel2
             // 
@@ -75,7 +75,7 @@ namespace School_Pourchases
             tempLblCostItem.Name = "lblCostItem";
             tempLblCostItem.Size = new Size(110, 23);
             tempLblCostItem.TabIndex = 2;
-            tempLblCostItem.Text = cost+" руб.";
+            tempLblCostItem.Text = cost + " руб.";
             tempLblCostItem.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblNameItem
@@ -95,13 +95,15 @@ namespace School_Pourchases
             tempPictureItem.TabStop = false;
             tempPictureItem.WaitOnLoad = true;
         }
-
-        public ComponentsView()
+        Container parentContainer;
+        public ComponentsView(Container parentContainer)
         {
             InitializeComponent();
-            for (int i=0;i<10;i++)
-                LoadItem("Залупа ебаная",500,"Я вахуе кто покупает эту ебанину");
-
+            this.parentContainer = parentContainer;
+            for (int i = 0; i < 10; i++)
+                LoadItem("Залупа ебаная", 500, "Я вахуе кто покупает эту ебанину");
+            lblNameUser.Text = parentContainer.user.UserName;
+            lblSchoolName.Text = parentContainer.user.SchoolName;
         }
 
         private void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,9 +111,6 @@ namespace School_Pourchases
 
         }
 
-        private void btnAddToCart_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
