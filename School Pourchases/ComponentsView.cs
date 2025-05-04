@@ -12,7 +12,7 @@ namespace School_Pourchases
 {
     public partial class ComponentsView : UserControl
     {
-        public void LoadItem(string name, double cost, string description)
+        public void LoadItem(string name, double cost, string description) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
 
             // 
@@ -35,14 +35,20 @@ namespace School_Pourchases
             tempItemPanel.Controls.Add(tempPictureItem);
             tempItemPanel.Location = new Point(3, 3);
             tempItemPanel.Name = "itemPanel";
-            tempItemPanel.Size = new Size(486, 129);
+            tempItemPanel.Size = new Size(632, 129);
             tempItemPanel.TabIndex = 0;
             // 
             // btnAddToCart
             // 
-            tempBtnAddToCart.Location = new Point(401, 98);
+            tempBtnAddToCart.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
+            tempBtnAddToCart.FlatAppearance.BorderSize = 2;
+            tempBtnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
+            tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+            tempBtnAddToCart.BackColor = Color.Wheat;
+            tempBtnAddToCart.FlatStyle = FlatStyle.Flat;
+            tempBtnAddToCart.Location = new Point(520, 98);
             tempBtnAddToCart.Name = "btnAddToCart";
-            tempBtnAddToCart.Size = new Size(75, 23);
+            tempBtnAddToCart.Size = new Size(80, 26);
             tempBtnAddToCart.TabIndex = 4;
             tempBtnAddToCart.Text = "Добавить";
             tempBtnAddToCart.UseVisualStyleBackColor = true;
@@ -53,10 +59,10 @@ namespace School_Pourchases
             tempPanel2.BackColor = Color.Khaki;
             tempPanel2.BorderStyle = BorderStyle.FixedSingle;
             tempPanel2.Controls.Add(tempLblDescriptionItem);
-            tempPanel2.Location = new Point(276, 9);
+            tempPanel2.Location = new Point(300, 9);
             tempPanel2.Name = "panel2";
             tempPanel2.Padding = new Padding(5);
-            tempPanel2.Size = new Size(200, 82);
+            tempPanel2.Size = new Size(300, 82);
             tempPanel2.TabIndex = 3;
             // 
             // lblDescriptionItem

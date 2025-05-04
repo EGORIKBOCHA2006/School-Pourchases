@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+using Production;
 using School_Pourchases.Models;
 namespace School_Pourchases
 {
@@ -7,8 +7,8 @@ namespace School_Pourchases
 
     public partial class Container : Form
     {
-
-        public User user;
+        
+        public  User user;
         
         public Container()
         {

@@ -31,6 +31,9 @@ namespace School_Pourchases
 
         private async void Login_Click(object sender, EventArgs e)
         {
+            parentContainer.user = new Models.User(0, "DEV", "DEV", "DEV", "DEV");
+           CloseLogining(parentContainer);
+            return;
             if (schoolTb.Text != "" && responsibleTb.Text != "" && passwordTb.Text != "")
             {
 
