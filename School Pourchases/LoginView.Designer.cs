@@ -39,13 +39,15 @@
             label6 = new Label();
             label1 = new Label();
             RegisterPage = new TabPage();
-            registerBtn = new Button();
-            makePasswordTb = new TextBox();
-            makePersonTb = new TextBox();
-            makeSchoolNameTb = new TextBox();
-            label5 = new Label();
-            label4 = new Label();
+            typeSchoolCb = new ComboBox();
+            passwordRegTb = new TextBox();
+            responsibleRegTb = new TextBox();
+            schoolNameRegTb = new TextBox();
             label3 = new Label();
+            label4 = new Label();
+            label7 = new Label();
+            label5 = new Label();
+            registerBtn = new Button();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             LoginPage.SuspendLayout();
@@ -95,7 +97,7 @@
             loginBtn.BackColor = Color.FromArgb(255, 128, 0);
             loginBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
             loginBtn.FlatStyle = FlatStyle.Flat;
-            loginBtn.Location = new Point(11, 163);
+            loginBtn.Location = new Point(11, 170);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(349, 37);
             loginBtn.TabIndex = 4;
@@ -154,13 +156,15 @@
             // RegisterPage
             // 
             RegisterPage.BackColor = SystemColors.ControlLightLight;
-            RegisterPage.Controls.Add(registerBtn);
-            RegisterPage.Controls.Add(makePasswordTb);
-            RegisterPage.Controls.Add(makePersonTb);
-            RegisterPage.Controls.Add(makeSchoolNameTb);
-            RegisterPage.Controls.Add(label5);
-            RegisterPage.Controls.Add(label4);
+            RegisterPage.Controls.Add(typeSchoolCb);
+            RegisterPage.Controls.Add(passwordRegTb);
+            RegisterPage.Controls.Add(responsibleRegTb);
+            RegisterPage.Controls.Add(schoolNameRegTb);
             RegisterPage.Controls.Add(label3);
+            RegisterPage.Controls.Add(label4);
+            RegisterPage.Controls.Add(label7);
+            RegisterPage.Controls.Add(label5);
+            RegisterPage.Controls.Add(registerBtn);
             RegisterPage.Location = new Point(4, 27);
             RegisterPage.Name = "RegisterPage";
             RegisterPage.Padding = new Padding(3);
@@ -168,66 +172,84 @@
             RegisterPage.TabIndex = 1;
             RegisterPage.Text = "Регистрация";
             // 
+            // typeSchoolCb
+            // 
+            typeSchoolCb.DropDownStyle = ComboBoxStyle.DropDownList;
+            typeSchoolCb.Items.AddRange(new object[] { "Сельская школа", "Школа в среднем городе", "Школа в большом городе" });
+            typeSchoolCb.Location = new Point(158, 70);
+            typeSchoolCb.Name = "typeSchoolCb";
+            typeSchoolCb.Size = new Size(202, 23);
+            typeSchoolCb.TabIndex = 10;
+            // 
+            // passwordRegTb
+            // 
+            passwordRegTb.Location = new Point(158, 135);
+            passwordRegTb.Name = "passwordRegTb";
+            passwordRegTb.Size = new Size(202, 23);
+            passwordRegTb.TabIndex = 9;
+            // 
+            // responsibleRegTb
+            // 
+            responsibleRegTb.Location = new Point(158, 103);
+            responsibleRegTb.Name = "responsibleRegTb";
+            responsibleRegTb.Size = new Size(202, 23);
+            responsibleRegTb.TabIndex = 8;
+            // 
+            // schoolNameRegTb
+            // 
+            schoolNameRegTb.Location = new Point(158, 36);
+            schoolNameRegTb.Name = "schoolNameRegTb";
+            schoolNameRegTb.Size = new Size(202, 23);
+            schoolNameRegTb.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.Location = new Point(11, 134);
+            label3.Name = "label3";
+            label3.Size = new Size(107, 23);
+            label3.TabIndex = 4;
+            label3.Text = "Пароль";
+            label3.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            label4.Location = new Point(11, 93);
+            label4.Name = "label4";
+            label4.Size = new Size(125, 40);
+            label4.TabIndex = 5;
+            label4.Text = "Имя пользователя";
+            label4.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            label7.Location = new Point(11, 70);
+            label7.Name = "label7";
+            label7.Size = new Size(107, 23);
+            label7.TabIndex = 6;
+            label7.Text = "Тип школы";
+            label7.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label5
+            // 
+            label5.Location = new Point(11, 35);
+            label5.Name = "label5";
+            label5.Size = new Size(107, 23);
+            label5.TabIndex = 6;
+            label5.Text = "Название школы";
+            label5.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // registerBtn
             // 
             registerBtn.BackColor = Color.FromArgb(255, 128, 0);
             registerBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
             registerBtn.FlatStyle = FlatStyle.Flat;
-            registerBtn.Location = new Point(11, 170);
+            registerBtn.Location = new Point(11, 193);
             registerBtn.Name = "registerBtn";
             registerBtn.Size = new Size(349, 37);
             registerBtn.TabIndex = 3;
             registerBtn.Text = "Заргистрироваться";
             registerBtn.UseVisualStyleBackColor = false;
             registerBtn.Click += Register_Click;
-            // 
-            // makePasswordTb
-            // 
-            makePasswordTb.Location = new Point(153, 134);
-            makePasswordTb.Name = "makePasswordTb";
-            makePasswordTb.Size = new Size(207, 23);
-            makePasswordTb.TabIndex = 1;
-            // 
-            // makePersonTb
-            // 
-            makePersonTb.Location = new Point(153, 85);
-            makePersonTb.Name = "makePersonTb";
-            makePersonTb.Size = new Size(207, 23);
-            makePersonTb.TabIndex = 1;
-            // 
-            // makeSchoolNameTb
-            // 
-            makeSchoolNameTb.Location = new Point(153, 39);
-            makeSchoolNameTb.Name = "makeSchoolNameTb";
-            makeSchoolNameTb.Size = new Size(207, 23);
-            makeSchoolNameTb.TabIndex = 1;
-            // 
-            // label5
-            // 
-            label5.Location = new Point(8, 134);
-            label5.Name = "label5";
-            label5.Size = new Size(139, 23);
-            label5.TabIndex = 0;
-            label5.Text = "Пароль";
-            label5.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label4
-            // 
-            label4.Location = new Point(8, 85);
-            label4.Name = "label4";
-            label4.Size = new Size(139, 23);
-            label4.TabIndex = 0;
-            label4.Text = "ФИО ответственного";
-            label4.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            label3.Location = new Point(8, 39);
-            label3.Name = "label3";
-            label3.Size = new Size(139, 23);
-            label3.TabIndex = 0;
-            label3.Text = "Название школы";
-            label3.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // LoginView
             // 
@@ -257,14 +279,16 @@
         private TextBox schoolTb;
         private Label label2;
         private Label label1;
-        private TextBox makeSchoolNameTb;
-        private Label label3;
-        private TextBox makePasswordTb;
-        private TextBox makePersonTb;
-        private Label label5;
-        private Label label4;
         private Button registerBtn;
         private TextBox responsibleTb;
         private Label label6;
+        private TextBox passwordRegTb;
+        private TextBox responsibleRegTb;
+        private TextBox schoolNameRegTb;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private ComboBox typeSchoolCb;
+        private Label label7;
     }
 }
