@@ -52,7 +52,7 @@
             sortTypeCb.BackColor = Color.White;
             sortTypeCb.DropDownStyle = ComboBoxStyle.DropDownList;
             sortTypeCb.FormattingEnabled = true;
-            sortTypeCb.Items.AddRange(new object[] { "Все товары", "Мониторы", "Процессоры" });
+            sortTypeCb.Items.AddRange(new object[] { "Монитор", "Процессор", "Все товары" });
             sortTypeCb.Location = new Point(74, 5);
             sortTypeCb.Name = "sortTypeCb";
             sortTypeCb.Size = new Size(152, 23);
@@ -137,7 +137,7 @@
             OrderByCb.Name = "OrderByCb";
             OrderByCb.Size = new Size(152, 23);
             OrderByCb.TabIndex = 2;
-            OrderByCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
+            OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             // 
             // label9
             // 

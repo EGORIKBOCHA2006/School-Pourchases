@@ -16,25 +16,41 @@ namespace School_Pourchases
     public partial class ComponentsView : UserControl
     {
 
-
+        private int selectedIndexOrderBy = 0;
+        private int selectedIndexSortBy = 0;
         private List<Product> GetProductsFromDatabase()
         {
             List<Product> products = new List<Product>();
 
 
             parentContainer.sqlConnection.Open();
-            
-            SqlCommand command = new SqlCommand("SELECT Id, name, typeId, cost,  description, imageSource FROM CommonItems", parentContainer.sqlConnection);
+            string orderBystring = " ";
+            string sortByString = " and typeId=@idType";
+            switch (selectedIndexOrderBy)
+            {
+                case 0:
+                    orderBystring = "order by cost asc";
+                    break;
+                case 1:
+                    orderBystring = "order by cost desc";
+                    break;
+                case 2:
+                    break;
+            }
+            SqlParameter sortByParametr = new SqlParameter("@idType", System.Data.SqlDbType.Int);
 
+            SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((sortTypeCb.SelectedText == "Все товары") ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
+            command.Parameters.Add(sortByParametr);
+            sortByParametr.Value = selectedIndexSortBy;
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    products.Add(new Product(reader.GetString(1), reader.GetDecimal(3)) {Id=reader.GetInt32(0), IdType=reader.GetInt32(2), Description=reader.GetString(4), ImageSource=reader.GetString(5) });
-               
+                    products.Add(new Product(reader.GetString(1), reader.GetDecimal(3)) { Id = reader.GetInt32(0), IdType = reader.GetInt32(2), Description = reader.GetString(4), ImageSource = reader.GetString(5) });
+
                 }
             }
-            
+
             parentContainer.sqlConnection.Close();
 
             return products;
@@ -50,7 +66,7 @@ namespace School_Pourchases
                 PrintItem(product);
             }
         }
-        
+
 
         private void PrintItem(Product product) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
@@ -92,7 +108,7 @@ namespace School_Pourchases
             tempBtnAddToCart.TabIndex = 4;
             tempBtnAddToCart.Text = "Добавить";
             tempBtnAddToCart.UseVisualStyleBackColor = true;
-            
+
             // 
             // panel2
             // 
@@ -138,7 +154,7 @@ namespace School_Pourchases
             tempPictureItem.ImageLocation = product.ImageSource;
             tempPictureItem.ErrorImage = null;
             tempPictureItem.Location = new Point(0, 0);
-            tempPictureItem .Name = "pictureBox1";
+            tempPictureItem.Name = "pictureBox1";
             tempPictureItem.Size = new Size(159, 118);
             tempPictureItem.SizeMode = PictureBoxSizeMode.Zoom;
             tempPictureItem.TabIndex = 10;
@@ -153,14 +169,18 @@ namespace School_Pourchases
             sortTypeCb.SelectedIndex = 0;
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
-            LoadItemsAsync();  
+            LoadItemsAsync();
         }
 
         private void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
+            selectedIndexSortBy = sortTypeCb.SelectedIndex;
 
         }
 
-        
+        private void OrderByCb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedIndexOrderBy=OrderByCb.SelectedIndex;
+        }
     }
 }
