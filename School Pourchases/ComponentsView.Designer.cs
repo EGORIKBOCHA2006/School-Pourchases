@@ -50,12 +50,13 @@
             // sortTypeCb
             // 
             sortTypeCb.BackColor = Color.White;
+            sortTypeCb.DropDownStyle = ComboBoxStyle.DropDownList;
             sortTypeCb.FormattingEnabled = true;
+            sortTypeCb.Items.AddRange(new object[] { "Все товары", "Мониторы", "Процессоры" });
             sortTypeCb.Location = new Point(74, 5);
             sortTypeCb.Name = "sortTypeCb";
             sortTypeCb.Size = new Size(152, 23);
             sortTypeCb.TabIndex = 2;
-            sortTypeCb.Text = "Название категории";
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label1
@@ -129,12 +130,13 @@
             // OrderByCb
             // 
             OrderByCb.BackColor = Color.White;
+            OrderByCb.DropDownStyle = ComboBoxStyle.DropDownList;
             OrderByCb.FormattingEnabled = true;
+            OrderByCb.Items.AddRange(new object[] { "По возрастанию цены", "По убыванию цены", "Нет сортировки" });
             OrderByCb.Location = new Point(74, 38);
             OrderByCb.Name = "OrderByCb";
             OrderByCb.Size = new Size(152, 23);
             OrderByCb.TabIndex = 2;
-            OrderByCb.Text = "Название категории";
             OrderByCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label9

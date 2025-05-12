@@ -23,6 +23,7 @@ namespace School_Pourchases
 
 
             parentContainer.sqlConnection.Open();
+            
             SqlCommand command = new SqlCommand("SELECT Id, name, typeId, cost,  description, imageSource FROM CommonItems", parentContainer.sqlConnection);
 
             using (var reader = command.ExecuteReader())
@@ -148,6 +149,8 @@ namespace School_Pourchases
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
+            OrderByCb.SelectedIndex = 0;
+            sortTypeCb.SelectedIndex = 0;
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
             LoadItemsAsync();  
