@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Production;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +14,42 @@ namespace School_Pourchases
 {
     public partial class ComponentsView : UserControl
     {
-        public void LoadItem(string name, double cost, string description) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
+
+
+        private List<Product> GetProductsFromDatabase()
+        {
+            List<Product> products = new List<Product>();
+
+
+            parentContainer.sqlConnection.Open();
+            SqlCommand command = new SqlCommand("SELECT Id, name, typeId, cost, description FROM CommonItems", parentContainer.sqlConnection);
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    products.Add(new Product(reader.GetString(1), reader.GetDecimal(3)) {Id=reader.GetInt32(0), IdType=reader.GetInt32(2), Description=reader.GetString(4) });
+               
+                }
+            }
+            
+            parentContainer.sqlConnection.Close();
+
+            return products;
+        }
+
+        private async Task LoadItemsAsync()
+        {
+            panelCatalog.Controls.Clear();
+            var products = await Task.Run(() => GetProductsFromDatabase());
+
+            foreach (var product in products)
+            {
+                PrintItem(product);
+            }
+        }
+
+        private void PrintItem(Product product) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
 
             // 
@@ -73,7 +110,7 @@ namespace School_Pourchases
             tempLblDescriptionItem.Name = "lblDescriptionItem";
             tempLblDescriptionItem.Size = new Size(188, 70);
             tempLblDescriptionItem.TabIndex = 0;
-            tempLblDescriptionItem.Text = description;
+            tempLblDescriptionItem.Text = product.Description;
             // 
             // lblCostItem
             // 
@@ -81,7 +118,7 @@ namespace School_Pourchases
             tempLblCostItem.Name = "lblCostItem";
             tempLblCostItem.Size = new Size(110, 23);
             tempLblCostItem.TabIndex = 2;
-            tempLblCostItem.Text = cost + " руб.";
+            tempLblCostItem.Text = product.Price.ToString() + " руб.";
             tempLblCostItem.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblNameItem
@@ -90,7 +127,7 @@ namespace School_Pourchases
             tempLblNameItem.Name = "lblNameItem";
             tempLblNameItem.Size = new Size(110, 53);
             tempLblNameItem.TabIndex = 1;
-            tempLblNameItem.Text = name;
+            tempLblNameItem.Text = product.Name;
             // 
             // itemPicture
             // 
@@ -106,10 +143,9 @@ namespace School_Pourchases
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
-            for (int i = 0; i < 10; i++)
-                LoadItem("Залупа ебаная", 500, "Я вахуе кто покупает эту ебанину");
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
+            LoadItemsAsync();  
         }
 
         private void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)

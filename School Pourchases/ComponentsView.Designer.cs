@@ -43,7 +43,6 @@
             panel1 = new Panel();
             label5 = new Label();
             lblNameUser = new Label();
-            button1 = new Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -195,27 +194,11 @@
             lblNameUser.Size = new Size(147, 47);
             lblNameUser.TabIndex = 4;
             // 
-            // button1
-            // 
-            button1.BackColor = Color.Wheat;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
-            button1.FlatAppearance.BorderSize = 2;
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(301, 87);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 10;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = false;
-            // 
             // ComponentsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
-            Controls.Add(button1);
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panelCatalog);
@@ -247,6 +230,5 @@
         private Panel panel1;
         private Label label5;
         private Label lblNameUser;
-        private Button button1;
     }
 }
