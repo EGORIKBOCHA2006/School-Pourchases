@@ -1,10 +1,26 @@
 ﻿namespace Production
 {
-    public abstract class Product
+    public class Product
     {
-        private int _price;
+        private int _idType;
 
-        public int Price
+        public int IdType
+        {
+            get { return _idType; }
+            set { _idType = value; }
+        }
+        private string _imageSource;
+
+        public string ImageSource
+        {
+            get { return _imageSource; }
+            set { _imageSource = value; }
+        }
+
+
+        private decimal _price;
+
+        public decimal Price
         {
             get { return _price; }
             set { _price = value; }
@@ -24,15 +40,29 @@
                 }
             }
         }
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         virtual public void PrintInfo()
         {
             Console.WriteLine($"Товар: {Name}\nЦена: {Price}");
         }
 
-        public abstract IEnumerable<object> GetObjectFields();
 
-        public Product(string name, int price)
+        public Product(string name, decimal price)
         {
             Name = name;
             Price = price;
@@ -73,10 +103,6 @@
             Console.WriteLine($"Разрешение: {Width}X{Height}");
         }
 
-        public override List<object> GetObjectFields()
-        {
-            return new List<object> { Price, Name, Width, Height };
-        }
         
         public void CapitaliseFirstLetter()
         {

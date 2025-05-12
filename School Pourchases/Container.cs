@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using Production;
 using School_Pourchases.Models;
 namespace School_Pourchases
@@ -9,7 +10,9 @@ namespace School_Pourchases
     {
         
         public  User user;
-        
+        public SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-LBTERG7\SQLEXPRESS;Initial Catalog=SchooIItems; Integrated Security=SSPI; TrustServerCertificate=True;");
+
+
         public Container()
         {
             
