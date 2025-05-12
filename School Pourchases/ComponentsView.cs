@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Production;
+using School_Pourchases.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,13 +23,13 @@ namespace School_Pourchases
 
 
             parentContainer.sqlConnection.Open();
-            SqlCommand command = new SqlCommand("SELECT Id, name, typeId, cost, description FROM CommonItems", parentContainer.sqlConnection);
+            SqlCommand command = new SqlCommand("SELECT Id, name, typeId, cost,  description, imageSource FROM CommonItems", parentContainer.sqlConnection);
 
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    products.Add(new Product(reader.GetString(1), reader.GetDecimal(3)) {Id=reader.GetInt32(0), IdType=reader.GetInt32(2), Description=reader.GetString(4) });
+                    products.Add(new Product(reader.GetString(1), reader.GetDecimal(3)) {Id=reader.GetInt32(0), IdType=reader.GetInt32(2), Description=reader.GetString(4), ImageSource=reader.GetString(5) });
                
                 }
             }
@@ -48,6 +49,7 @@ namespace School_Pourchases
                 PrintItem(product);
             }
         }
+        
 
         private void PrintItem(Product product) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
@@ -114,7 +116,7 @@ namespace School_Pourchases
             // 
             // lblCostItem
             // 
-            tempLblCostItem.Location = new Point(124, 63);
+            tempLblCostItem.Location = new Point(142, 63);
             tempLblCostItem.Name = "lblCostItem";
             tempLblCostItem.Size = new Size(110, 23);
             tempLblCostItem.TabIndex = 2;
@@ -123,20 +125,23 @@ namespace School_Pourchases
             // 
             // lblNameItem
             // 
-            tempLblNameItem.Location = new Point(124, 10);
+            tempLblNameItem.Location = new Point(142, 10);
             tempLblNameItem.Name = "lblNameItem";
             tempLblNameItem.Size = new Size(110, 53);
             tempLblNameItem.TabIndex = 1;
             tempLblNameItem.Text = product.Name;
             // 
             // itemPicture
-            // 
-            tempPictureItem.Location = new Point(7, 9);
-            tempPictureItem.Name = "itemPicture";
-            tempPictureItem.Size = new Size(98, 82);
-            tempPictureItem.TabIndex = 0;
+            //
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentsView));
+            tempPictureItem.ImageLocation = product.ImageSource;
+            tempPictureItem.ErrorImage = null;
+            tempPictureItem.Location = new Point(0, 0);
+            tempPictureItem .Name = "pictureBox1";
+            tempPictureItem.Size = new Size(159, 118);
+            tempPictureItem.SizeMode = PictureBoxSizeMode.Zoom;
+            tempPictureItem.TabIndex = 10;
             tempPictureItem.TabStop = false;
-            tempPictureItem.WaitOnLoad = true;
         }
         Container parentContainer;
         public ComponentsView(Container parentContainer)

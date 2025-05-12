@@ -9,6 +9,13 @@
             get { return _idType; }
             set { _idType = value; }
         }
+        private string _imageSource;
+
+        public string ImageSource
+        {
+            get { return _imageSource; }
+            set { _imageSource = value; }
+        }
 
 
         private decimal _price;
