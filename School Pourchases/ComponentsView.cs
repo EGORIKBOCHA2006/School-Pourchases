@@ -173,7 +173,7 @@ namespace School_Pourchases
             lblSchoolName.Text = parentContainer.user.SchoolName;
             LoadItemsAsync();
             OrderByCb.SelectedIndex = 0;
-            sortTypeCb.SelectedIndex = 2;
+            sortTypeCb.SelectedIndex = sortTypeCb.Items.Count-1;
             OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
 
