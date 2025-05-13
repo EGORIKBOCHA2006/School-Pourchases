@@ -17,15 +17,16 @@ namespace School_Pourchases
     {
 
         private int selectedIndexOrderBy = 0;
-        private int selectedIndexSortBy = 0;
+        private string selectedTextSortType = "все товары";
         private List<Product> GetProductsFromDatabase()
         {
             List<Product> products = new List<Product>();
 
 
             parentContainer.sqlConnection.Open();
+
             string orderBystring = " ";
-            string sortByString = " and typeId=@idType";
+            string sortByString = " and TypesProducts.name=@Type";
             switch (selectedIndexOrderBy)
             {
                 case 0:
@@ -37,11 +38,12 @@ namespace School_Pourchases
                 case 2:
                     break;
             }
-            SqlParameter sortByParametr = new SqlParameter("@idType", System.Data.SqlDbType.Int);
+            SqlParameter sortByParametr = new SqlParameter("@Type", System.Data.SqlDbType.NVarChar);
 
-            SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((sortTypeCb.SelectedText == "Все товары") ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
+            SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((selectedTextSortType == "все товары") ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
             command.Parameters.Add(sortByParametr);
-            sortByParametr.Value = selectedIndexSortBy;
+
+            sortByParametr.Value = selectedTextSortType.ToLower();
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -64,6 +66,7 @@ namespace School_Pourchases
             foreach (var product in products)
             {
                 PrintItem(product);
+
             }
         }
 
@@ -165,22 +168,29 @@ namespace School_Pourchases
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
-            OrderByCb.SelectedIndex = 0;
-            sortTypeCb.SelectedIndex = 0;
+            
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
             LoadItemsAsync();
+            OrderByCb.SelectedIndex = 0;
+            sortTypeCb.SelectedIndex = 2;
+            OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
+            sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
+
         }
 
-        private void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
+        private async void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedIndexSortBy = sortTypeCb.SelectedIndex;
+            selectedTextSortType = sortTypeCb.SelectedItem.ToString().ToLower();
+            MessageBox.Show(selectedTextSortType);
+            await LoadItemsAsync();
 
         }
 
-        private void OrderByCb_SelectedIndexChanged(object sender, EventArgs e)
+        private async void OrderByCb_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedIndexOrderBy=OrderByCb.SelectedIndex;
+            await LoadItemsAsync();
         }
     }
 }

@@ -57,7 +57,7 @@
             sortTypeCb.Name = "sortTypeCb";
             sortTypeCb.Size = new Size(152, 23);
             sortTypeCb.TabIndex = 2;
-            sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
+            //sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -137,7 +137,7 @@
             OrderByCb.Name = "OrderByCb";
             OrderByCb.Size = new Size(152, 23);
             OrderByCb.TabIndex = 2;
-            OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
+            //OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             // 
             // label9
             // 
