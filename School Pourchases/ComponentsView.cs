@@ -80,21 +80,24 @@ namespace School_Pourchases
             Panel tempItemPanel = new Panel();
             Button tempBtnAddToCart = new Button();
             Panel tempPanel2 = new Panel();
+            Panel tempPanel3 = new Panel();
             Label tempLblDescriptionItem = new Label();
             Label tempLblCostItem = new Label();
             Label tempLblNameItem = new Label();
+            Label tempLblTypeItem = new Label();
             PictureBox tempPictureItem = new PictureBox();
             panelCatalog.Controls.Add(tempItemPanel);
             tempItemPanel.BackColor = Color.FromArgb(251, 255, 191);
             tempItemPanel.BorderStyle = BorderStyle.FixedSingle;
             tempItemPanel.Controls.Add(tempBtnAddToCart);
             tempItemPanel.Controls.Add(tempPanel2);
-            tempItemPanel.Controls.Add(tempLblCostItem);
-            tempItemPanel.Controls.Add(tempLblNameItem);
+            tempItemPanel.Controls.Add(tempPanel3);
+            //tempItemPanel.Controls.Add(tempLblCostItem);
+            //tempItemPanel.Controls.Add(tempLblNameItem);
             tempItemPanel.Controls.Add(tempPictureItem);
             tempItemPanel.Location = new Point(3, 3);
             tempItemPanel.Name = "itemPanel";
-            tempItemPanel.Size = new Size(632, 129);
+            tempItemPanel.Size = new Size(970, 229);
             tempItemPanel.TabIndex = 0;
             // 
             // btnAddToCart
@@ -104,13 +107,28 @@ namespace School_Pourchases
             tempBtnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
             tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
             tempBtnAddToCart.BackColor = Color.Wheat;
+            tempBtnAddToCart.Font = new Font("Segoe UI", 12F);
             tempBtnAddToCart.FlatStyle = FlatStyle.Flat;
-            tempBtnAddToCart.Location = new Point(520, 98);
+            tempBtnAddToCart.Location = new Point(820, 180);
             tempBtnAddToCart.Name = "btnAddToCart";
-            tempBtnAddToCart.Size = new Size(80, 26);
+            tempBtnAddToCart.Size = new Size(130, 40);
             tempBtnAddToCart.TabIndex = 4;
             tempBtnAddToCart.Text = "Добавить";
             tempBtnAddToCart.UseVisualStyleBackColor = true;
+
+            // 
+            // panel3
+            //
+            tempPanel3.BackColor = Color.Khaki;
+            tempPanel3.BorderStyle = BorderStyle.FixedSingle;
+            tempPanel3.Controls.Add(tempLblNameItem);
+            tempPanel3.Controls.Add(tempLblCostItem);
+            tempPanel3.Location = new Point(160, 9);
+            tempPanel3.Name = "panel3";
+            tempPanel3.Font= new Font("Segoe UI", 12F);
+            tempPanel3.Padding = new Padding(5);
+            tempPanel3.Size = new Size(170, 160);
+            
 
             // 
             // panel2
@@ -118,25 +136,26 @@ namespace School_Pourchases
             tempPanel2.BackColor = Color.Khaki;
             tempPanel2.BorderStyle = BorderStyle.FixedSingle;
             tempPanel2.Controls.Add(tempLblDescriptionItem);
-            tempPanel2.Location = new Point(300, 9);
+            tempPanel2.Location = new Point(350, 9);
             tempPanel2.Name = "panel2";
             tempPanel2.Padding = new Padding(5);
-            tempPanel2.Size = new Size(300, 82);
+            tempPanel2.Size = new Size(600, 160);
             tempPanel2.TabIndex = 3;
             // 
             // lblDescriptionItem
             // 
             tempLblDescriptionItem.BackColor = Color.Ivory;
             tempLblDescriptionItem.Dock = DockStyle.Fill;
+            tempLblDescriptionItem.Font = new Font("Segoe UI", 15F);
             tempLblDescriptionItem.Location = new Point(5, 5);
             tempLblDescriptionItem.Name = "lblDescriptionItem";
-            tempLblDescriptionItem.Size = new Size(188, 70);
+            
             tempLblDescriptionItem.TabIndex = 0;
             tempLblDescriptionItem.Text = product.Description;
             // 
             // lblCostItem
             // 
-            tempLblCostItem.Location = new Point(142, 63);
+            tempLblCostItem.Location = new Point(0, 128);
             tempLblCostItem.Name = "lblCostItem";
             tempLblCostItem.Size = new Size(110, 23);
             tempLblCostItem.TabIndex = 2;
@@ -145,9 +164,9 @@ namespace School_Pourchases
             // 
             // lblNameItem
             // 
-            tempLblNameItem.Location = new Point(142, 10);
+            tempLblNameItem.Location = new Point(0, 10);
             tempLblNameItem.Name = "lblNameItem";
-            tempLblNameItem.Size = new Size(110, 53);
+            tempLblNameItem.Size = new Size(170, 70);
             tempLblNameItem.TabIndex = 1;
             tempLblNameItem.Text = product.Name;
             // 

@@ -42,9 +42,9 @@
             // contentPanel
             // 
             contentPanel.Dock = DockStyle.Right;
-            contentPanel.Location = new Point(128, 0);
+            contentPanel.Location = new Point(129, 0);
             contentPanel.Name = "contentPanel";
-            contentPanel.Size = new Size(672, 450);
+            contentPanel.Size = new Size(1011, 562);
             contentPanel.TabIndex = 0;
             // 
             // menuPanel
@@ -54,9 +54,9 @@
             menuPanel.Controls.Add(pictureBox2);
             menuPanel.Controls.Add(caralogBtn);
             menuPanel.Dock = DockStyle.Right;
-            menuPanel.Location = new Point(-1, 0);
+            menuPanel.Location = new Point(0, 0);
             menuPanel.Name = "menuPanel";
-            menuPanel.Size = new Size(129, 450);
+            menuPanel.Size = new Size(129, 562);
             menuPanel.TabIndex = 1;
             // 
             // pictureBox3
@@ -88,13 +88,13 @@
             caralogBtn.SizeMode = PictureBoxSizeMode.Zoom;
             caralogBtn.TabIndex = 0;
             caralogBtn.TabStop = false;
-            caralogBtn.Click += this.caralogBtn_Click_1;
+            caralogBtn.Click += caralogBtn_Click_1;
             // 
             // Container
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1140, 562);
             Controls.Add(menuPanel);
             Controls.Add(contentPanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;

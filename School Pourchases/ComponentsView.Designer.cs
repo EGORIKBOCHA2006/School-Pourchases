@@ -57,7 +57,6 @@
             sortTypeCb.Name = "sortTypeCb";
             sortTypeCb.Size = new Size(152, 23);
             sortTypeCb.TabIndex = 2;
-            //sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -71,16 +70,18 @@
             // lblSchoolName
             // 
             lblSchoolName.BackColor = Color.PapayaWhip;
-            lblSchoolName.Location = new Point(531, 10);
+            lblSchoolName.Font = new Font("Segoe UI", 12F);
+            lblSchoolName.Location = new Point(596, 10);
             lblSchoolName.Name = "lblSchoolName";
-            lblSchoolName.Size = new Size(141, 47);
+            lblSchoolName.Size = new Size(289, 47);
             lblSchoolName.TabIndex = 4;
             // 
             // label2
             // 
+            label2.Font = new Font("Segoe UI", 14F);
             label2.Location = new Point(447, 10);
             label2.Name = "label2";
-            label2.Size = new Size(78, 15);
+            label2.Size = new Size(122, 27);
             label2.TabIndex = 3;
             label2.Text = "Учреждение";
             label2.TextAlign = ContentAlignment.MiddleRight;
@@ -101,7 +102,7 @@
             panelCatalog.FlowDirection = FlowDirection.TopDown;
             panelCatalog.Location = new Point(14, 142);
             panelCatalog.Name = "panelCatalog";
-            panelCatalog.Size = new Size(655, 292);
+            panelCatalog.Size = new Size(994, 417);
             panelCatalog.TabIndex = 7;
             panelCatalog.WrapContents = false;
             // 
@@ -113,7 +114,7 @@
             panel3.Controls.Add(OrderByCb);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(sortTypeCb);
-            panel3.Location = new Point(418, 71);
+            panel3.Location = new Point(338, 71);
             panel3.Name = "panel3";
             panel3.Size = new Size(231, 68);
             panel3.TabIndex = 8;
@@ -137,7 +138,6 @@
             OrderByCb.Name = "OrderByCb";
             OrderByCb.Size = new Size(152, 23);
             OrderByCb.TabIndex = 2;
-            //OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             // 
             // label9
             // 
@@ -176,14 +176,15 @@
             panel1.Controls.Add(lblCountItems);
             panel1.Location = new Point(17, 71);
             panel1.Name = "panel1";
-            panel1.Size = new Size(244, 68);
+            panel1.Size = new Size(302, 68);
             panel1.TabIndex = 9;
             // 
             // label5
             // 
-            label5.Location = new Point(202, 10);
+            label5.Font = new Font("Segoe UI", 14F);
+            label5.Location = new Point(106, 10);
             label5.Name = "label5";
-            label5.Size = new Size(88, 15);
+            label5.Size = new Size(147, 27);
             label5.TabIndex = 3;
             label5.Text = "Пользователь";
             label5.TextAlign = ContentAlignment.MiddleRight;
@@ -191,9 +192,10 @@
             // lblNameUser
             // 
             lblNameUser.BackColor = Color.PapayaWhip;
-            lblNameUser.Location = new Point(294, 10);
+            lblNameUser.Font = new Font("Segoe UI", 12F);
+            lblNameUser.Location = new Point(269, 10);
             lblNameUser.Name = "lblNameUser";
-            lblNameUser.Size = new Size(147, 47);
+            lblNameUser.Size = new Size(172, 47);
             lblNameUser.TabIndex = 4;
             // 
             // ComponentsView
@@ -209,7 +211,7 @@
             Controls.Add(label5);
             Controls.Add(label2);
             Name = "ComponentsView";
-            Size = new Size(672, 450);
+            Size = new Size(1011, 562);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
