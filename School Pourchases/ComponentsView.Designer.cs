@@ -43,6 +43,7 @@
             panel1 = new Panel();
             label5 = new Label();
             lblNameUser = new Label();
+            label3 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -64,14 +65,14 @@
             label1.Name = "label1";
             label1.Size = new Size(127, 15);
             label1.TabIndex = 3;
-            label1.Text = "Товаров в корзине:";
+            label1.Text = "Добавлено товара:";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblSchoolName
             // 
             lblSchoolName.BackColor = Color.PapayaWhip;
             lblSchoolName.Font = new Font("Segoe UI", 12F);
-            lblSchoolName.Location = new Point(596, 10);
+            lblSchoolName.Location = new Point(708, 10);
             lblSchoolName.Name = "lblSchoolName";
             lblSchoolName.Size = new Size(289, 47);
             lblSchoolName.TabIndex = 4;
@@ -79,7 +80,7 @@
             // label2
             // 
             label2.Font = new Font("Segoe UI", 14F);
-            label2.Location = new Point(447, 10);
+            label2.Location = new Point(579, 10);
             label2.Name = "label2";
             label2.Size = new Size(122, 27);
             label2.TabIndex = 3;
@@ -145,20 +146,22 @@
             label9.Name = "label9";
             label9.Size = new Size(131, 15);
             label9.TabIndex = 3;
-            label9.Text = "Примерная цена";
+            label9.Text = "Примерная цена руб.";
             label9.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblCost
             // 
+            lblCost.AutoSize = true;
             lblCost.Location = new Point(146, 42);
             lblCost.Name = "lblCost";
-            lblCost.Size = new Size(13, 15);
+            lblCost.Size = new Size(28, 15);
             lblCost.TabIndex = 5;
-            lblCost.Text = "0";
+            lblCost.Text = "0,00";
             lblCost.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblCountItems
             // 
+            lblCountItems.AutoSize = true;
             lblCountItems.Location = new Point(146, 10);
             lblCountItems.Name = "lblCountItems";
             lblCountItems.Size = new Size(13, 15);
@@ -182,7 +185,7 @@
             // label5
             // 
             label5.Font = new Font("Segoe UI", 14F);
-            label5.Location = new Point(106, 10);
+            label5.Location = new Point(244, 10);
             label5.Name = "label5";
             label5.Size = new Size(147, 27);
             label5.TabIndex = 3;
@@ -193,16 +196,26 @@
             // 
             lblNameUser.BackColor = Color.PapayaWhip;
             lblNameUser.Font = new Font("Segoe UI", 12F);
-            lblNameUser.Location = new Point(269, 10);
+            lblNameUser.Location = new Point(397, 10);
             lblNameUser.Name = "lblNameUser";
             lblNameUser.Size = new Size(172, 47);
             lblNameUser.TabIndex = 4;
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label3.Location = new Point(9, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(141, 37);
+            label3.TabIndex = 10;
+            label3.Text = "Каталог";
             // 
             // ComponentsView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
+            Controls.Add(label3);
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panelCatalog);
@@ -215,6 +228,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -234,5 +248,6 @@
         private Panel panel1;
         private Label label5;
         private Label lblNameUser;
+        private Label label3;
     }
 }

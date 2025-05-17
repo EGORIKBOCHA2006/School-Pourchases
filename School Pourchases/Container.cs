@@ -4,18 +4,19 @@ using School_Pourchases.Models;
 namespace School_Pourchases
 {
 
-    
+
 
     public partial class Container : Form
     {
-        
-        public  User user;
-        public SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-LBTERG7\SQLEXPRESS;Initial Catalog=SchooIItems; Integrated Security=SSPI; TrustServerCertificate=True;");
 
+        public User user;
+        public SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-LBTERG7\SQLEXPRESS;Initial Catalog=SchooIItems; Integrated Security=SSPI; TrustServerCertificate=True;");
+        public decimal totalCost = 0;
+        public int productCount = 0;
 
         public Container()
         {
-            
+
             InitializeComponent();
             menuPanel.Visible = false;
             contentPanel.Dock = DockStyle.Fill;
@@ -29,9 +30,17 @@ namespace School_Pourchases
         {
             contentPanel.Controls.Clear();
             ComponentsView componentsView = new ComponentsView(this);
-            componentsView.Dock= DockStyle.Fill;
+            componentsView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
-            
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            contentPanel.Controls.Clear();
+            CartView componentsView = new CartView(this);
+            componentsView.Dock = DockStyle.Fill;
+            contentPanel.Controls.Add(componentsView);
         }
     }
 }

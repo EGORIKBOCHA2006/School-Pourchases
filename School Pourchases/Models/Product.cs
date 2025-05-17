@@ -67,6 +67,16 @@
             Name = name;
             Price = price;
         }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Product other)
+                return other.Id==this.Id;
+            else return false;  
+        }
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 
     public class Monitor : Product

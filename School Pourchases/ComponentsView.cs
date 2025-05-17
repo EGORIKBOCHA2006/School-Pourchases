@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Production;
+using School_Pourchases.Models;
 using School_Pourchases.Properties;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +20,7 @@ namespace School_Pourchases
 
         private int selectedIndexOrderBy = 0;
         private string selectedTextSortType = "все товары";
+        
         private List<Product> GetProductsFromDatabase()
         {
             List<Product> products = new List<Product>();
@@ -84,7 +87,6 @@ namespace School_Pourchases
             Label tempLblDescriptionItem = new Label();
             Label tempLblCostItem = new Label();
             Label tempLblNameItem = new Label();
-            Label tempLblTypeItem = new Label();
             PictureBox tempPictureItem = new PictureBox();
             panelCatalog.Controls.Add(tempItemPanel);
             tempItemPanel.BackColor = Color.FromArgb(251, 255, 191);
@@ -106,16 +108,35 @@ namespace School_Pourchases
             tempBtnAddToCart.FlatAppearance.BorderSize = 2;
             tempBtnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
             tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
-            tempBtnAddToCart.BackColor = Color.Wheat;
+            
+            tempBtnAddToCart.UseVisualStyleBackColor = true;
             tempBtnAddToCart.Font = new Font("Segoe UI", 12F);
             tempBtnAddToCart.FlatStyle = FlatStyle.Flat;
             tempBtnAddToCart.Location = new Point(820, 180);
             tempBtnAddToCart.Name = "btnAddToCart";
             tempBtnAddToCart.Size = new Size(130, 40);
             tempBtnAddToCart.TabIndex = 4;
-            tempBtnAddToCart.Text = "Добавить";
-            tempBtnAddToCart.UseVisualStyleBackColor = true;
 
+            if (!parentContainer.user.cart.ContainsKey(product))
+            {
+                tempBtnAddToCart.Text = "Добавить";
+                tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+                tempBtnAddToCart.BackColor = Color.Wheat;
+                tempBtnAddToCart.Click += tempBtnAddToCart_Click;
+            }
+            else
+            {
+                tempBtnAddToCart.Text = "Удалить";
+                tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.Red;
+                tempBtnAddToCart.BackColor = Color.LightGreen;
+                tempBtnAddToCart.Click += tempBtnAddToCartDelete_Click;
+            }
+            string productJson = JsonSerializer.Serialize<Product>(product, new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
+            tempBtnAddToCart.Tag = productJson;
+            //MessageBox.Show(productJson);
             // 
             // panel3
             //
@@ -210,6 +231,38 @@ namespace School_Pourchases
         {
             selectedIndexOrderBy=OrderByCb.SelectedIndex;
             await LoadItemsAsync();
+        }
+        private void tempBtnAddToCart_Click(object sender, EventArgs e)
+        {
+            string productJson = ((Control)sender).Tag as string;
+            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            parentContainer.user.cart.Add(product, 1);
+            MessageBox.Show("Товар добавлен в корзину");
+            parentContainer.productCount++;
+            parentContainer.totalCost += product.Price;
+            lblCost.Text = parentContainer.totalCost.ToString();
+            lblCountItems.Text= parentContainer.productCount.ToString();
+            (((Control)sender) as Button).Text = "Удалить";
+            (((Control)sender) as Button).BackColor = Color.LightGreen;
+            (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.Red;
+            (((Control)sender) as Button).Click -= tempBtnAddToCart_Click;
+            (((Control)sender) as Button).Click += tempBtnAddToCartDelete_Click;
+        }
+        private void tempBtnAddToCartDelete_Click(object sender, EventArgs e)
+        {
+            string productJson = ((Control)sender).Tag as string;
+            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            parentContainer.user.cart.Remove(product);
+            MessageBox.Show("Товар удален из корзины");
+            parentContainer.productCount--;
+            parentContainer.totalCost -= product.Price;
+            lblCost.Text = parentContainer.totalCost.ToString();
+            lblCountItems.Text = parentContainer.productCount.ToString();
+            (((Control)sender) as Button).Text = "Добавить";
+            (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+            (((Control)sender) as Button).BackColor = Color.Wheat;
+            (((Control)sender) as Button).Click -= tempBtnAddToCartDelete_Click;
+            (((Control)sender) as Button).Click += tempBtnAddToCart_Click;
         }
     }
 }
