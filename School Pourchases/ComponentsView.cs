@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -116,6 +117,13 @@ namespace School_Pourchases
             tempBtnAddToCart.Text = "Добавить";
             tempBtnAddToCart.UseVisualStyleBackColor = true;
 
+            tempBtnAddToCart.Click += tempBtnAddToCart_Click;
+            string productJson = JsonSerializer.Serialize<Product>(product, new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
+            tempBtnAddToCart.Tag = productJson;
+            MessageBox.Show(productJson);
             // 
             // panel3
             //
@@ -210,6 +218,30 @@ namespace School_Pourchases
         {
             selectedIndexOrderBy=OrderByCb.SelectedIndex;
             await LoadItemsAsync();
+        }
+        private void tempBtnAddToCart_Click(object sender, EventArgs e)
+        {
+            string productJson = ((Control)sender).Tag as string;
+            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            parentContainer.user.cart.Add(product, 1);
+            MessageBox.Show("Товар добавлен в корзину");
+            (((Control)sender) as Button).Text = "Удалить";
+            (((Control)sender) as Button).BackColor = Color.LightGreen;
+            (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.Red;
+            (((Control)sender) as Button).Click -= tempBtnAddToCart_Click;
+            (((Control)sender) as Button).Click += tempBtnAddToCartDelete_Click;
+        }
+        private void tempBtnAddToCartDelete_Click(object sender, EventArgs e)
+        {
+            string productJson = ((Control)sender).Tag as string;
+            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            parentContainer.user.cart.Remove(product);
+            MessageBox.Show("Товар удален из корзины");
+            (((Control)sender) as Button).Text = "Добавить";
+            (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+            (((Control)sender) as Button).BackColor = Color.Wheat;
+            (((Control)sender) as Button).Click -= tempBtnAddToCartDelete_Click;
+            (((Control)sender) as Button).Click += tempBtnAddToCart_Click;
         }
     }
 }
