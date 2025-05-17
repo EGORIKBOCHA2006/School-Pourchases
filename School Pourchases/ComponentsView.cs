@@ -131,11 +131,8 @@ namespace School_Pourchases
                 tempBtnAddToCart.BackColor = Color.LightGreen;
                 tempBtnAddToCart.Click += tempBtnAddToCartDelete_Click;
             }
-            string productJson = JsonSerializer.Serialize<Product>(product, new JsonSerializerOptions
-            {
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
-            tempBtnAddToCart.Tag = productJson;
+            
+            tempBtnAddToCart.Tag = product;
             //MessageBox.Show(productJson);
             // 
             // panel3
@@ -234,8 +231,7 @@ namespace School_Pourchases
         }
         private void tempBtnAddToCart_Click(object sender, EventArgs e)
         {
-            string productJson = ((Control)sender).Tag as string;
-            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.user.cart.Add(product, 1);
             MessageBox.Show("Товар добавлен в корзину");
             parentContainer.productCount++;
@@ -250,8 +246,7 @@ namespace School_Pourchases
         }
         private void tempBtnAddToCartDelete_Click(object sender, EventArgs e)
         {
-            string productJson = ((Control)sender).Tag as string;
-            Product product = JsonSerializer.Deserialize<Product>(productJson);
+            Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.user.cart.Remove(product);
             MessageBox.Show("Товар удален из корзины");
             parentContainer.productCount--;
