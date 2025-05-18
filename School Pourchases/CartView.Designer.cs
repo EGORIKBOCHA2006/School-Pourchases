@@ -35,6 +35,7 @@
             label1 = new Label();
             lblCost = new Label();
             lblCountItems = new Label();
+            btnMakeCsvFile = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -110,11 +111,29 @@
             lblCountItems.Text = "0";
             lblCountItems.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // btnMakeCsvFile
+            // 
+            btnMakeCsvFile.BackColor = Color.Wheat;
+            btnMakeCsvFile.Cursor = Cursors.Hand;
+            btnMakeCsvFile.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
+            btnMakeCsvFile.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
+            btnMakeCsvFile.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 225, 192);
+            btnMakeCsvFile.FlatStyle = FlatStyle.Flat;
+            btnMakeCsvFile.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMakeCsvFile.Location = new Point(677, 100);
+            btnMakeCsvFile.Name = "btnMakeCsvFile";
+            btnMakeCsvFile.Size = new Size(331, 39);
+            btnMakeCsvFile.TabIndex = 13;
+            btnMakeCsvFile.Text = "Создать Csv таблицу с товаром";
+            btnMakeCsvFile.UseVisualStyleBackColor = false;
+            btnMakeCsvFile.Click += btnMakeCsvFile_Click;
+            // 
             // CartView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
+            Controls.Add(btnMakeCsvFile);
             Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(panelCart);
@@ -134,5 +153,6 @@
         private Label label1;
         private Label lblCost;
         private Label lblCountItems;
+        private Button btnMakeCsvFile;
     }
 }

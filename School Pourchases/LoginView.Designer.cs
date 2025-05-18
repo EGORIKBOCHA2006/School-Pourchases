@@ -57,7 +57,7 @@
             // panel1
             // 
             panel1.Controls.Add(tabControl1);
-            panel1.Location = new Point(200, 110);
+            panel1.Location = new Point(390, 160);
             panel1.Name = "panel1";
             panel1.Size = new Size(374, 269);
             panel1.TabIndex = 0;
@@ -97,7 +97,7 @@
             loginBtn.BackColor = Color.FromArgb(255, 128, 0);
             loginBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
             loginBtn.FlatStyle = FlatStyle.Flat;
-            loginBtn.Location = new Point(11, 170);
+            loginBtn.Location = new Point(11, 176);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(349, 37);
             loginBtn.TabIndex = 4;
@@ -258,7 +258,7 @@
             BackColor = SystemColors.HighlightText;
             Controls.Add(panel1);
             Name = "LoginView";
-            Size = new Size(800, 450);
+            Size = new Size(1156, 601);
             panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             LoginPage.ResumeLayout(false);

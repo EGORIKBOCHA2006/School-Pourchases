@@ -23,24 +23,27 @@ namespace School_Pourchases
             LoginView loginView = new LoginView(this);
             loginView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(loginView);
-
+            
 
         }
-        private void caralogBtn_Click_1(object sender, EventArgs e)
+
+        private void catalogBtn_Click_1(object sender, EventArgs e)
         {
             contentPanel.Controls.Clear();
             ComponentsView componentsView = new ComponentsView(this);
             componentsView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
-
+            
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void cartBtn_Click(object sender, EventArgs e)
         {
             contentPanel.Controls.Clear();
             CartView componentsView = new CartView(this);
             componentsView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
         }
+
+        
     }
 }
