@@ -27,12 +27,17 @@ namespace School_Pourchases
             parent.contentPanel.Controls.Clear();
             parent.contentPanel.Dock = DockStyle.Right;
             parent.menuPanel.Visible = true;
+            parent.contentPanel.Controls.Clear();
+            ComponentsView componentsView = new ComponentsView(parent);
+            componentsView.Dock = DockStyle.Fill;
+            parent.contentPanel.Controls.Add(componentsView);
+
         }
 
         private async void Login_Click(object sender, EventArgs e)
         {
             parentContainer.user = new Models.User(0, "DEV", "DEV", "DEV", "DEV");
-           CloseLogining(parentContainer);
+            CloseLogining(parentContainer);
             return;
             if (schoolTb.Text != "" && responsibleTb.Text != "" && passwordTb.Text != "")
             {

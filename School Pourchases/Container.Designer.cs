@@ -30,13 +30,13 @@
         {
             contentPanel = new Panel();
             menuPanel = new Panel();
-            pictureBox3 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            caralogBtn = new PictureBox();
+            profileBtn = new PictureBox();
+            cartBtn = new PictureBox();
+            catalogBtn = new PictureBox();
             menuPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)caralogBtn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)profileBtn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cartBtn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)catalogBtn).BeginInit();
             SuspendLayout();
             // 
             // contentPanel
@@ -49,47 +49,51 @@
             // 
             // menuPanel
             // 
-            menuPanel.BackColor = Color.Gainsboro;
-            menuPanel.Controls.Add(pictureBox3);
-            menuPanel.Controls.Add(pictureBox2);
-            menuPanel.Controls.Add(caralogBtn);
+            menuPanel.BackColor = Color.Khaki;
+            menuPanel.BorderStyle = BorderStyle.Fixed3D;
+            menuPanel.Controls.Add(profileBtn);
+            menuPanel.Controls.Add(cartBtn);
+            menuPanel.Controls.Add(catalogBtn);
             menuPanel.Dock = DockStyle.Right;
             menuPanel.Location = new Point(0, 0);
             menuPanel.Name = "menuPanel";
             menuPanel.Size = new Size(129, 562);
             menuPanel.TabIndex = 1;
             // 
-            // pictureBox3
+            // profileBtn
             // 
-            pictureBox3.Image = Properties.Resources.pngwing_com;
-            pictureBox3.Location = new Point(20, 253);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(83, 93);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 0;
-            pictureBox3.TabStop = false;
+            profileBtn.Cursor = Cursors.Hand;
+            profileBtn.Image = Properties.Resources.pngwing_com;
+            profileBtn.Location = new Point(20, 253);
+            profileBtn.Name = "profileBtn";
+            profileBtn.Size = new Size(83, 93);
+            profileBtn.SizeMode = PictureBoxSizeMode.Zoom;
+            profileBtn.TabIndex = 0;
+            profileBtn.TabStop = false;
             // 
-            // pictureBox2
+            // cartBtn
             // 
-            pictureBox2.Image = Properties.Resources.pngwing_com;
-            pictureBox2.Location = new Point(20, 137);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(83, 93);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            cartBtn.Cursor = Cursors.Hand;
+            cartBtn.Image = Properties.Resources.pngwing_com;
+            cartBtn.Location = new Point(20, 137);
+            cartBtn.Name = "cartBtn";
+            cartBtn.Size = new Size(83, 93);
+            cartBtn.SizeMode = PictureBoxSizeMode.Zoom;
+            cartBtn.TabIndex = 0;
+            cartBtn.TabStop = false;
+            cartBtn.Click += cartBtn_Click;
             // 
-            // caralogBtn
+            // catalogBtn
             // 
-            caralogBtn.Image = Properties.Resources.pngwing_com;
-            caralogBtn.Location = new Point(20, 28);
-            caralogBtn.Name = "caralogBtn";
-            caralogBtn.Size = new Size(83, 93);
-            caralogBtn.SizeMode = PictureBoxSizeMode.Zoom;
-            caralogBtn.TabIndex = 0;
-            caralogBtn.TabStop = false;
-            caralogBtn.Click += caralogBtn_Click_1;
+            catalogBtn.Cursor = Cursors.Hand;
+            catalogBtn.Image = Properties.Resources.pngwing_com;
+            catalogBtn.Location = new Point(20, 28);
+            catalogBtn.Name = "catalogBtn";
+            catalogBtn.Size = new Size(83, 93);
+            catalogBtn.SizeMode = PictureBoxSizeMode.Zoom;
+            catalogBtn.TabIndex = 0;
+            catalogBtn.TabStop = false;
+            catalogBtn.Click += catalogBtn_Click_1;
             // 
             // Container
             // 
@@ -99,12 +103,13 @@
             Controls.Add(menuPanel);
             Controls.Add(contentPanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Container";
             Text = "Школьные закупки";
             menuPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)caralogBtn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)profileBtn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cartBtn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)catalogBtn).EndInit();
             ResumeLayout(false);
         }
 
@@ -112,8 +117,8 @@
 
         public Panel contentPanel;
         public Panel menuPanel;
-        private PictureBox caralogBtn;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
+        private PictureBox catalogBtn;
+        private PictureBox profileBtn;
+        private PictureBox cartBtn;
     }
 }

@@ -45,6 +45,8 @@ namespace School_Pourchases
             if (parentContainer.productCount == 0)
             {
                 panelCart.Visible = false;
+                btnMakeCsvFile.Visible = false;
+                panel1.Visible = false;
                 label3.Text = "Корзина пуста!";
                 return;
             }
