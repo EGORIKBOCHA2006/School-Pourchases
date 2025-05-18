@@ -126,6 +126,7 @@
             btnMakeCsvFile.TabIndex = 13;
             btnMakeCsvFile.Text = "Создать Csv таблицу с товаром";
             btnMakeCsvFile.UseVisualStyleBackColor = false;
+            btnMakeCsvFile.Click += btnMakeCsvFile_Click;
             // 
             // CartView
             // 

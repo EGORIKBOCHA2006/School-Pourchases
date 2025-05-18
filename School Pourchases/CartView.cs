@@ -15,19 +15,19 @@ namespace School_Pourchases
     public partial class CartView : UserControl
     {
         Container parentContainer;
-        public CartView( Container parentContainer)
+        public CartView(Container parentContainer)
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
-            
-            
+
+
             UpdateCartTotals();
             LoadItemsAsync();
         }
         private async Task LoadItemsAsync()
         {
             panelCart.Controls.Clear();
-            
+
 
             foreach (var product in parentContainer.user.cart)
             {
@@ -138,7 +138,7 @@ namespace School_Pourchases
             };
             quantitySelector.ValueChanged += (sender, e) =>
             {
-                parentContainer.user.cart[product.Key]=(int)quantitySelector.Value;
+                parentContainer.user.cart[product.Key] = (int)quantitySelector.Value;
                 UpdateCartTotals();
             };
             // Кнопка удаления
@@ -151,7 +151,7 @@ namespace School_Pourchases
                 Location = new Point(820, 180),
                 Size = new Size(130, 40),
                 Cursor = Cursors.Hand
-                
+
             };
 
             // Настройка внешнего вида кнопки
@@ -186,6 +186,53 @@ namespace School_Pourchases
             panelCart.Controls.Add(tempItemPanel);
         }
 
-        
+        private void btnMakeCsvFile_Click(object sender, EventArgs e)
+        {
+            // Создаем и настраиваем диалог сохранения файла
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                saveFileDialog.FileName = "Товары на закупку " + DateTime.Now.ToString("yyyyMMdd") + ".csv";
+                saveFileDialog.DefaultExt = ".csv";
+                saveFileDialog.AddExtension = true;
+
+                // Показываем диалог и проверяем, что пользователь выбрал файл
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Получаем данные для экспорта (пример)
+                        
+                        // Создаем CSV содержимое
+                        StringBuilder csvContent = new StringBuilder();
+
+                        // Добавляем заголовки (пример)
+                        csvContent.AppendLine("Товар\tОписание\tПримерная цена руб.\tКоличество\tВсего руб.");
+
+                        // Добавляем данные
+                        foreach (KeyValuePair<Product,int> itemInfo in parentContainer.user.cart)
+                        {
+                            // Экранируем специальные символы и формируем строку
+                            csvContent.AppendLine($"{itemInfo.Key.Name}\t"+
+                                $"{itemInfo.Key.Description}\t"+
+                                $"{itemInfo.Key.Price}\t"+
+                                $"{itemInfo.Value}\t"+
+                                $"{itemInfo.Value*itemInfo.Key.Price}");
+                        }
+                        csvContent.AppendLine($"Итого руб.\t{parentContainer.totalCost}");
+                        // Записываем в файл
+                        File.WriteAllText(saveFileDialog.FileName, csvContent.ToString(), Encoding.Unicode);
+
+                        MessageBox.Show("Файл успешно экспортирован!", "Экспорт завершен",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при экспорте: {ex.Message}", "Ошибка",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
     }
 }
