@@ -20,7 +20,7 @@ namespace School_Pourchases
 
         private int selectedIndexOrderBy = 0;
         private string selectedTextSortType = "все товары";
-        
+
         private List<Product> GetProductsFromDatabase()
         {
             List<Product> products = new List<Product>();
@@ -74,143 +74,147 @@ namespace School_Pourchases
         }
 
 
-        private void PrintItem(Product product) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
+      
+        private void UpdateCartTotals()
         {
+            parentContainer.productCount = parentContainer.user.cart.Sum(x => x.Value);
+            parentContainer.totalCost = parentContainer.user.cart.Sum(x => x.Key.Price * x.Value);
+            lblCost.Text = parentContainer.totalCost.ToString();
+            lblCountItems.Text = parentContainer.productCount.ToString();
+        }
 
-            // 
-            // itemPanel
-            // 
-            Panel tempItemPanel = new Panel();
-            Button tempBtnAddToCart = new Button();
-            Panel tempPanel2 = new Panel();
-            Panel tempPanel3 = new Panel();
-            Label tempLblDescriptionItem = new Label();
-            Label tempLblCostItem = new Label();
-            Label tempLblNameItem = new Label();
-            PictureBox tempPictureItem = new PictureBox();
-            panelCatalog.Controls.Add(tempItemPanel);
-            tempItemPanel.BackColor = Color.FromArgb(251, 255, 191);
-            tempItemPanel.BorderStyle = BorderStyle.FixedSingle;
-            tempItemPanel.Controls.Add(tempBtnAddToCart);
-            tempItemPanel.Controls.Add(tempPanel2);
-            tempItemPanel.Controls.Add(tempPanel3);
-            //tempItemPanel.Controls.Add(tempLblCostItem);
-            //tempItemPanel.Controls.Add(tempLblNameItem);
-            tempItemPanel.Controls.Add(tempPictureItem);
-            tempItemPanel.Location = new Point(3, 3);
-            tempItemPanel.Name = "itemPanel";
-            tempItemPanel.Size = new Size(970, 229);
-            tempItemPanel.TabIndex = 0;
-            // 
-            // btnAddToCart
-            // 
-            tempBtnAddToCart.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
-            tempBtnAddToCart.FlatAppearance.BorderSize = 2;
-            tempBtnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
-            tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
-            
-            tempBtnAddToCart.UseVisualStyleBackColor = true;
-            tempBtnAddToCart.Font = new Font("Segoe UI", 12F);
-            tempBtnAddToCart.FlatStyle = FlatStyle.Flat;
-            tempBtnAddToCart.Location = new Point(820, 180);
-            tempBtnAddToCart.Name = "btnAddToCart";
-            tempBtnAddToCart.Size = new Size(130, 40);
-            tempBtnAddToCart.TabIndex = 4;
+        private void PrintItem(Product product)
+        {
+            // Основная панель товара (сохраняем оригинальное название tempItemPanel)
+            Panel itemPanel = new Panel
+            {
+                BackColor = Color.FromArgb(251, 255, 191),
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point(3, 3),
+                Size = new Size(970, 229),
+                Padding = new Padding(5)
+            };
 
+            // Картинка товара (tempPictureItem)
+            PictureBox pictureItem = new PictureBox
+            {
+                ImageLocation = product.ImageSource,
+                ErrorImage = null,
+                Location = new Point(10, 10),
+                Size = new Size(140, 140),
+                SizeMode = PictureBoxSizeMode.Zoom,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            // Панель с основной информацией (tempPanel3)
+            Panel infoPanel = new Panel
+            {
+                BackColor = Color.Khaki,
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point(160, 10),
+                Size = new Size(170, 140),
+                Padding = new Padding(5)
+            };
+
+            // Название товара (tempLblNameItem)
+            Label lblNameItem = new Label
+            {
+                Text = product.Name,
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                Dock = DockStyle.Top,
+                Height = 50,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            // Цена товара (tempLblCostItem)
+            Label lblCostItem = new Label
+            {
+                Text = $"{product.Price} руб.",
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                Dock = DockStyle.Bottom,
+                Height = 30,
+                ForeColor = Color.DarkGreen,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            // Панель с описанием (tempPanel2)
+            Panel descPanel = new Panel
+            {
+                BackColor = Color.Khaki,
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point(350, 10),
+                Size = new Size(600, 140),
+                Padding = new Padding(5)
+            };
+
+            // Описание товара (tempLblDescriptionItem)
+            Label lblDescriptionItem = new Label
+            {
+                Text = product.Description,
+                Font = new Font("Segoe UI", 11F),
+                Dock = DockStyle.Fill,
+                BackColor = Color.Ivory,
+                Padding = new Padding(5)
+            };
+
+            // Кнопка добавления/удаления (tempBtnAddToCart)
+            Button btnAddToCart = new Button
+            {
+                Font = new Font("Segoe UI", 12F),
+                FlatStyle = FlatStyle.Flat,
+                Location = new Point(820, 180),
+                Size = new Size(130, 40),
+                Cursor = Cursors.Hand,
+                Tag = product // Сохраняем продукт в Tag
+            };
+
+            // Настройка кнопки в зависимости от состояния корзины
             if (!parentContainer.user.cart.ContainsKey(product))
             {
-                tempBtnAddToCart.Text = "Добавить";
-                tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
-                tempBtnAddToCart.BackColor = Color.Wheat;
-                tempBtnAddToCart.Click += tempBtnAddToCart_Click;
+                btnAddToCart.Text = "Добавить";
+                btnAddToCart.BackColor = Color.Wheat;
+                btnAddToCart.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
+                btnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+                btnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
+                btnAddToCart.Click += tempBtnAddToCart_Click;
+
             }
             else
             {
-                tempBtnAddToCart.Text = "Удалить";
-                tempBtnAddToCart.FlatAppearance.MouseOverBackColor = Color.Red;
-                tempBtnAddToCart.BackColor = Color.LightGreen;
-                tempBtnAddToCart.Click += tempBtnAddToCartDelete_Click;
+                btnAddToCart.Text = "Удалить";
+                btnAddToCart.BackColor = Color.FromArgb(255, 128, 128);
+                btnAddToCart.FlatAppearance.BorderColor = Color.FromArgb(200, 0, 0);
+                btnAddToCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 160, 160);
+                btnAddToCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(220, 80, 80);
+                btnAddToCart.Click += tempBtnAddToCartDelete_Click;
             }
-            
-            tempBtnAddToCart.Tag = product;
-            //MessageBox.Show(productJson);
-            // 
-            // panel3
-            //
-            tempPanel3.BackColor = Color.Khaki;
-            tempPanel3.BorderStyle = BorderStyle.FixedSingle;
-            tempPanel3.Controls.Add(tempLblNameItem);
-            tempPanel3.Controls.Add(tempLblCostItem);
-            tempPanel3.Location = new Point(160, 9);
-            tempPanel3.Name = "panel3";
-            tempPanel3.Font= new Font("Segoe UI", 12F);
-            tempPanel3.Padding = new Padding(5);
-            tempPanel3.Size = new Size(170, 160);
-            
 
-            // 
-            // panel2
-            // 
-            tempPanel2.BackColor = Color.Khaki;
-            tempPanel2.BorderStyle = BorderStyle.FixedSingle;
-            tempPanel2.Controls.Add(tempLblDescriptionItem);
-            tempPanel2.Location = new Point(350, 9);
-            tempPanel2.Name = "panel2";
-            tempPanel2.Padding = new Padding(5);
-            tempPanel2.Size = new Size(600, 160);
-            tempPanel2.TabIndex = 3;
-            // 
-            // lblDescriptionItem
-            // 
-            tempLblDescriptionItem.BackColor = Color.Ivory;
-            tempLblDescriptionItem.Dock = DockStyle.Fill;
-            tempLblDescriptionItem.Font = new Font("Segoe UI", 15F);
-            tempLblDescriptionItem.Location = new Point(5, 5);
-            tempLblDescriptionItem.Name = "lblDescriptionItem";
-            
-            tempLblDescriptionItem.TabIndex = 0;
-            tempLblDescriptionItem.Text = product.Description;
-            // 
-            // lblCostItem
-            // 
-            tempLblCostItem.Location = new Point(0, 128);
-            tempLblCostItem.Name = "lblCostItem";
-            tempLblCostItem.Size = new Size(110, 23);
-            tempLblCostItem.TabIndex = 2;
-            tempLblCostItem.Text = product.Price.ToString() + " руб.";
-            tempLblCostItem.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblNameItem
-            // 
-            tempLblNameItem.Location = new Point(0, 10);
-            tempLblNameItem.Name = "lblNameItem";
-            tempLblNameItem.Size = new Size(170, 70);
-            tempLblNameItem.TabIndex = 1;
-            tempLblNameItem.Text = product.Name;
-            // 
-            // itemPicture
-            //
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentsView));
-            tempPictureItem.ImageLocation = product.ImageSource;
-            tempPictureItem.ErrorImage = null;
-            tempPictureItem.Location = new Point(0, 0);
-            tempPictureItem.Name = "pictureBox1";
-            tempPictureItem.Size = new Size(159, 118);
-            tempPictureItem.SizeMode = PictureBoxSizeMode.Zoom;
-            tempPictureItem.TabIndex = 10;
-            tempPictureItem.TabStop = false;
+            // Добавляем элементы на панели (сохраняем оригинальную структуру)
+            infoPanel.Controls.Add(lblNameItem);
+            infoPanel.Controls.Add(lblNameItem);
+
+            descPanel.Controls.Add(lblDescriptionItem);
+
+            itemPanel.Controls.Add(pictureItem);
+            itemPanel.Controls.Add(infoPanel);
+            itemPanel.Controls.Add(descPanel);
+            itemPanel.Controls.Add(btnAddToCart);
+
+            // Добавляем на основную панель
+            panelCatalog.Controls.Add(itemPanel);
         }
         Container parentContainer;
         public ComponentsView(Container parentContainer)
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
-            
+
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
+            UpdateCartTotals();
             LoadItemsAsync();
             OrderByCb.SelectedIndex = 0;
-            sortTypeCb.SelectedIndex = sortTypeCb.Items.Count-1;
+            sortTypeCb.SelectedIndex = sortTypeCb.Items.Count - 1;
             OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
 
@@ -226,7 +230,7 @@ namespace School_Pourchases
 
         private async void OrderByCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedIndexOrderBy=OrderByCb.SelectedIndex;
+            selectedIndexOrderBy = OrderByCb.SelectedIndex;
             await LoadItemsAsync();
         }
         private void tempBtnAddToCart_Click(object sender, EventArgs e)
@@ -234,10 +238,7 @@ namespace School_Pourchases
             Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.user.cart.Add(product, 1);
             MessageBox.Show("Товар добавлен в корзину");
-            parentContainer.productCount++;
-            parentContainer.totalCost += product.Price;
-            lblCost.Text = parentContainer.totalCost.ToString();
-            lblCountItems.Text= parentContainer.productCount.ToString();
+            UpdateCartTotals();
             (((Control)sender) as Button).Text = "Удалить";
             (((Control)sender) as Button).BackColor = Color.LightGreen;
             (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.Red;
@@ -249,10 +250,7 @@ namespace School_Pourchases
             Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.user.cart.Remove(product);
             MessageBox.Show("Товар удален из корзины");
-            parentContainer.productCount--;
-            parentContainer.totalCost -= product.Price;
-            lblCost.Text = parentContainer.totalCost.ToString();
-            lblCountItems.Text = parentContainer.productCount.ToString();
+            UpdateCartTotals();
             (((Control)sender) as Button).Text = "Добавить";
             (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
             (((Control)sender) as Button).BackColor = Color.Wheat;

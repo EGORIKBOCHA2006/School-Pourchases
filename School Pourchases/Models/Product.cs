@@ -17,6 +17,14 @@
             set { _imageSource = value; }
         }
 
+        private int _count;
+
+        public int Count
+        {
+            get { return _count; }
+            set { _count = value; }
+        }
+
 
         private decimal _price;
 
