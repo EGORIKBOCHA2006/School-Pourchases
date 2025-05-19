@@ -19,7 +19,9 @@ namespace School_Pourchases
     {
 
         private int selectedIndexOrderBy = 0;
-        private string selectedTextSortType = "все товары";
+        private int selectedTextSortType=0;
+        
+            
 
         private List<Product> GetProductsFromDatabase()
         {
@@ -29,7 +31,7 @@ namespace School_Pourchases
             parentContainer.sqlConnection.Open();
 
             string orderBystring = " ";
-            string sortByString = " and TypesProducts.name=@Type";
+            string sortByString = " and TypesProducts.Id=@Type";
             switch (selectedIndexOrderBy)
             {
                 case 0:
@@ -41,12 +43,12 @@ namespace School_Pourchases
                 case 2:
                     break;
             }
-            SqlParameter sortByParametr = new SqlParameter("@Type", System.Data.SqlDbType.NVarChar);
+            SqlParameter sortByParametr = new SqlParameter("@Type", System.Data.SqlDbType.Int);
 
-            SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((selectedTextSortType == "все товары") ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
+            SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((selectedTextSortType == sortTypeCb.Items.Count) ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
             command.Parameters.Add(sortByParametr);
 
-            sortByParametr.Value = selectedTextSortType.ToLower();
+            sortByParametr.Value = selectedTextSortType;
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -148,9 +150,10 @@ namespace School_Pourchases
             };
 
             // Описание товара (tempLblDescriptionItem)
-            Label lblDescriptionItem = new Label
+            RichTextBox lblDescriptionItem = new RichTextBox
             {
                 Text = product.Description,
+                ReadOnly = true,
                 Font = new Font("Segoe UI", 11F),
                 Dock = DockStyle.Fill,
                 BackColor = Color.Ivory,
@@ -191,7 +194,7 @@ namespace School_Pourchases
 
             // Добавляем элементы на панели (сохраняем оригинальную структуру)
             infoPanel.Controls.Add(lblNameItem);
-            infoPanel.Controls.Add(lblNameItem);
+            infoPanel.Controls.Add(lblCostItem);
 
             descPanel.Controls.Add(lblDescriptionItem);
 
@@ -208,13 +211,13 @@ namespace School_Pourchases
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
-
+            selectedTextSortType=sortTypeCb.Items.Count;
             lblNameUser.Text = parentContainer.user.UserName;
             lblSchoolName.Text = parentContainer.user.SchoolName;
             UpdateCartTotals();
             LoadItemsAsync();
             OrderByCb.SelectedIndex = 0;
-            sortTypeCb.SelectedIndex = sortTypeCb.Items.Count - 1;
+            sortTypeCb.SelectedIndex =sortTypeCb.Items.Count-1;
             OrderByCb.SelectedIndexChanged += OrderByCb_SelectedIndexChanged;
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
 
@@ -222,8 +225,8 @@ namespace School_Pourchases
 
         private async void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedTextSortType = sortTypeCb.SelectedItem.ToString().ToLower();
-            MessageBox.Show(selectedTextSortType);
+            selectedTextSortType = sortTypeCb.SelectedIndex+1;
+            
             await LoadItemsAsync();
 
         }

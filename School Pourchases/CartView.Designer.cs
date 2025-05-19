@@ -36,7 +36,11 @@
             lblCost = new Label();
             lblCountItems = new Label();
             btnMakeCsvFile = new Button();
+            panel2 = new Panel();
+            rbOwnCart = new RadioButton();
+            rbRequiredCart = new RadioButton();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panelCart
@@ -128,11 +132,45 @@
             btnMakeCsvFile.UseVisualStyleBackColor = false;
             btnMakeCsvFile.Click += btnMakeCsvFile_Click;
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.PapayaWhip;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(rbRequiredCart);
+            panel2.Controls.Add(rbOwnCart);
+            panel2.Location = new Point(349, 71);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(302, 68);
+            panel2.TabIndex = 13;
+            // 
+            // rbOwnCart
+            // 
+            rbOwnCart.AutoSize = true;
+            rbOwnCart.Checked = true;
+            rbOwnCart.Location = new Point(31, 7);
+            rbOwnCart.Name = "rbOwnCart";
+            rbOwnCart.Size = new Size(90, 19);
+            rbOwnCart.TabIndex = 0;
+            rbOwnCart.TabStop = true;
+            rbOwnCart.Text = "Моя корзна";
+            rbOwnCart.UseVisualStyleBackColor = true;
+            // 
+            // rbRequiredCart
+            // 
+            rbRequiredCart.AutoSize = true;
+            rbRequiredCart.Location = new Point(31, 38);
+            rbRequiredCart.Name = "rbRequiredCart";
+            rbRequiredCart.Size = new Size(172, 19);
+            rbRequiredCart.TabIndex = 0;
+            rbRequiredCart.Text = "Рекомендованная корзина";
+            rbRequiredCart.UseVisualStyleBackColor = true;
+            // 
             // CartView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
+            Controls.Add(panel2);
             Controls.Add(btnMakeCsvFile);
             Controls.Add(panel1);
             Controls.Add(label3);
@@ -141,6 +179,8 @@
             Size = new Size(1011, 562);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -154,5 +194,8 @@
         private Label lblCost;
         private Label lblCountItems;
         private Button btnMakeCsvFile;
+        private Panel panel2;
+        private RadioButton rbRequiredCart;
+        private RadioButton rbOwnCart;
     }
 }
