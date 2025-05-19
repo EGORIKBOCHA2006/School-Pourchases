@@ -79,8 +79,8 @@ namespace School_Pourchases
       
         private void UpdateCartTotals()
         {
-            parentContainer.productCount = parentContainer.user.cart.Sum(x => x.Value);
-            parentContainer.totalCost = parentContainer.user.cart.Sum(x => x.Key.Price * x.Value);
+            parentContainer.productCount = parentContainer.User.Cart.Sum(x => x.Value);
+            parentContainer.totalCost = parentContainer.User.Cart.Sum(x => x.Key.Price * x.Value);
             lblCost.Text = parentContainer.totalCost.ToString();
             lblCountItems.Text = parentContainer.productCount.ToString();
         }
@@ -172,7 +172,7 @@ namespace School_Pourchases
             };
 
             // Настройка кнопки в зависимости от состояния корзины
-            if (!parentContainer.user.cart.ContainsKey(product))
+            if (!parentContainer.User.Cart.ContainsKey(product))
             {
                 btnAddToCart.Text = "Добавить";
                 btnAddToCart.BackColor = Color.Wheat;
@@ -212,8 +212,8 @@ namespace School_Pourchases
             InitializeComponent();
             this.parentContainer = parentContainer;
             selectedTextSortType=sortTypeCb.Items.Count;
-            lblNameUser.Text = parentContainer.user.UserName;
-            lblSchoolName.Text = parentContainer.user.SchoolName;
+            lblNameUser.Text = parentContainer.User.UserName;
+            lblSchoolName.Text = parentContainer.User.SchoolName;
             UpdateCartTotals();
             LoadItemsAsync();
             OrderByCb.SelectedIndex = 0;
@@ -239,7 +239,7 @@ namespace School_Pourchases
         private void tempBtnAddToCart_Click(object sender, EventArgs e)
         {
             Product product = (((Control)sender) as Button).Tag as Product;
-            parentContainer.user.cart.Add(product, 1);
+            parentContainer.User.Cart.Add(product, 1);
             MessageBox.Show("Товар добавлен в корзину");
             UpdateCartTotals();
             (((Control)sender) as Button).Text = "Удалить";
@@ -251,7 +251,7 @@ namespace School_Pourchases
         private void tempBtnAddToCartDelete_Click(object sender, EventArgs e)
         {
             Product product = (((Control)sender) as Button).Tag as Product;
-            parentContainer.user.cart.Remove(product);
+            parentContainer.User.Cart.Remove(product);
             MessageBox.Show("Товар удален из корзины");
             UpdateCartTotals();
             (((Control)sender) as Button).Text = "Добавить";

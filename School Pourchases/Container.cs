@@ -9,7 +9,7 @@ namespace School_Pourchases
     public partial class Container : Form
     {
 
-        public User user;
+        public User User;
         public SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-LBTERG7\SQLEXPRESS;Initial Catalog=SchooIItems; Integrated Security=SSPI; TrustServerCertificate=True;");
         public decimal totalCost = 0;
         public int productCount = 0;

@@ -29,7 +29,7 @@ namespace School_Pourchases
             panelCart.Controls.Clear();
 
 
-            foreach (var product in parentContainer.user.cart)
+            foreach (var product in parentContainer.User.Cart)
             {
                 PrintItem(product);
 
@@ -38,8 +38,8 @@ namespace School_Pourchases
 
         private void UpdateCartTotals()
         {
-            parentContainer.productCount = parentContainer.user.cart.Sum(x => x.Value);
-            parentContainer.totalCost = parentContainer.user.cart.Sum(x => x.Key.Price * x.Value);
+            parentContainer.productCount = parentContainer.User.Cart.Sum(x => x.Value);
+            parentContainer.totalCost = parentContainer.User.Cart.Sum(x => x.Key.Price * x.Value);
             lblCost.Text = parentContainer.totalCost.ToString();
             lblCountItems.Text = parentContainer.productCount.ToString();
             if (parentContainer.productCount == 0)
@@ -140,7 +140,7 @@ namespace School_Pourchases
             };
             quantitySelector.ValueChanged += (sender, e) =>
             {
-                parentContainer.user.cart[product.Key] = (int)quantitySelector.Value;
+                parentContainer.User.Cart[product.Key] = (int)quantitySelector.Value;
                 UpdateCartTotals();
             };
             // Кнопка удаления
@@ -165,7 +165,7 @@ namespace School_Pourchases
             tempBtnDeleteFromCart.Tag = product.Key;
             tempBtnDeleteFromCart.Click += (sender, e) =>
             {
-                parentContainer.user.cart.Remove(tempBtnDeleteFromCart.Tag as Product);
+                parentContainer.User.Cart.Remove(tempBtnDeleteFromCart.Tag as Product);
                 UpdateCartTotals();
                 panelCart.Controls.Remove(tempItemPanel);
             };
@@ -212,7 +212,7 @@ namespace School_Pourchases
                         csvContent.AppendLine("Товар\tОписание\tПримерная цена руб.\tКоличество\tВсего руб.");
 
                         // Добавляем данные
-                        foreach (KeyValuePair<Product,int> itemInfo in parentContainer.user.cart)
+                        foreach (KeyValuePair<Product,int> itemInfo in parentContainer.User.Cart)
                         {
                             // Экранируем специальные символы и формируем строку
                             csvContent.AppendLine($"{itemInfo.Key.Name}\t"+

@@ -15,8 +15,8 @@ namespace School_Pourchases.Models
         public string UserName { get; set; }
         public string TypeSchool { get; set; }
 
-        public Dictionary<Product, int> cart = new Dictionary<Product, int>();
-
+        public Dictionary<Product, int> Cart = new Dictionary<Product, int>();
+        public Dictionary<Product, int> RequiredCart = new Dictionary<Product, int>();
 
         public User(int userId, string userName, string schoolName, string typeSchool, string typeUser )
         {
