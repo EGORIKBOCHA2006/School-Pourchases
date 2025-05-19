@@ -37,8 +37,8 @@
             lblCountItems = new Label();
             btnMakeCsvFile = new Button();
             panel2 = new Panel();
-            rbOwnCart = new RadioButton();
             rbRequiredCart = new RadioButton();
+            rbOwnCart = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -72,9 +72,9 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(lblCost);
             panel1.Controls.Add(lblCountItems);
-            panel1.Location = new Point(17, 71);
+            panel1.Location = new Point(17, 67);
             panel1.Name = "panel1";
-            panel1.Size = new Size(302, 68);
+            panel1.Size = new Size(331, 68);
             panel1.TabIndex = 12;
             // 
             // label9
@@ -138,10 +138,20 @@
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(rbRequiredCart);
             panel2.Controls.Add(rbOwnCart);
-            panel2.Location = new Point(349, 71);
+            panel2.Location = new Point(367, 67);
             panel2.Name = "panel2";
-            panel2.Size = new Size(302, 68);
+            panel2.Size = new Size(231, 68);
             panel2.TabIndex = 13;
+            // 
+            // rbRequiredCart
+            // 
+            rbRequiredCart.AutoSize = true;
+            rbRequiredCart.Location = new Point(31, 38);
+            rbRequiredCart.Name = "rbRequiredCart";
+            rbRequiredCart.Size = new Size(172, 19);
+            rbRequiredCart.TabIndex = 0;
+            rbRequiredCart.Text = "Рекомендованная корзина";
+            rbRequiredCart.UseVisualStyleBackColor = true;
             // 
             // rbOwnCart
             // 
@@ -154,16 +164,7 @@
             rbOwnCart.TabStop = true;
             rbOwnCart.Text = "Моя корзна";
             rbOwnCart.UseVisualStyleBackColor = true;
-            // 
-            // rbRequiredCart
-            // 
-            rbRequiredCart.AutoSize = true;
-            rbRequiredCart.Location = new Point(31, 38);
-            rbRequiredCart.Name = "rbRequiredCart";
-            rbRequiredCart.Size = new Size(172, 19);
-            rbRequiredCart.TabIndex = 0;
-            rbRequiredCart.Text = "Рекомендованная корзина";
-            rbRequiredCart.UseVisualStyleBackColor = true;
+            rbOwnCart.CheckedChanged += rbOwnCart_CheckedChanged;
             // 
             // CartView
             // 

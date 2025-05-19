@@ -15,44 +15,50 @@ namespace School_Pourchases
     public partial class CartView : UserControl
     {
         Container parentContainer;
+        Dictionary<Product, int> cartOnSaving;
         public CartView(Container parentContainer)
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
+            cartOnSaving = this.parentContainer.User.Cart;
 
-
-            UpdateCartTotals();
-            LoadItemsAsync();
+            UpdateCartTotals(parentContainer.User.Cart.Count>0? parentContainer.User.Cart : parentContainer.User.RequiredCart);
+            if (parentContainer.User.Cart.Count==0)
+            {
+                rbRequiredCart.Checked = true;
+            }
+            LoadItems(parentContainer.User.Cart.Count>0?parentContainer.User.Cart:parentContainer.User.RequiredCart);
         }
-        private async Task LoadItemsAsync()
+        private  void LoadItems(Dictionary<Product,int> itemDictinary)
         {
             panelCart.Controls.Clear();
-
-
-            foreach (var product in parentContainer.User.Cart)
+            foreach (var product in itemDictinary)
             {
-                PrintItem(product);
+                PrintItem(product,itemDictinary);
 
             }
         }
 
-        private void UpdateCartTotals()
+        private void UpdateCartTotals(Dictionary<Product,int> cart)
         {
-            parentContainer.productCount = parentContainer.User.Cart.Sum(x => x.Value);
-            parentContainer.totalCost = parentContainer.User.Cart.Sum(x => x.Key.Price * x.Value);
+            parentContainer.productCount = cart.Sum(x => x.Value);
+            parentContainer.totalCost = cart.Sum(x => x.Key.Price * x.Value);
             lblCost.Text = parentContainer.totalCost.ToString();
             lblCountItems.Text = parentContainer.productCount.ToString();
-            if (parentContainer.productCount == 0)
+            
+            if (cart.Count == 0)
             {
-                panelCart.Visible = false;
-                btnMakeCsvFile.Visible = false;
-                panel1.Visible = false;
-                label3.Text = "Корзина пуста!";
-                return;
+                label3.Text = "Корзина пуста";
+                btnMakeCsvFile.Enabled = false;
+            }
+            else
+            {
+                label3.Text = "Корзина";
+                btnMakeCsvFile.Enabled = true;
             }
         }
 
-        private void PrintItem(KeyValuePair<Product, int> product) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
+        private void PrintItem(KeyValuePair<Product, int> product, Dictionary<Product,int> cart) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
 
             Panel tempItemPanel = new Panel
@@ -140,8 +146,8 @@ namespace School_Pourchases
             };
             quantitySelector.ValueChanged += (sender, e) =>
             {
-                parentContainer.User.Cart[product.Key] = (int)quantitySelector.Value;
-                UpdateCartTotals();
+                cart[product.Key] = (int)quantitySelector.Value;
+                UpdateCartTotals(cart);
             };
             // Кнопка удаления
             Button tempBtnDeleteFromCart = new Button
@@ -165,8 +171,8 @@ namespace School_Pourchases
             tempBtnDeleteFromCart.Tag = product.Key;
             tempBtnDeleteFromCart.Click += (sender, e) =>
             {
-                parentContainer.User.Cart.Remove(tempBtnDeleteFromCart.Tag as Product);
-                UpdateCartTotals();
+                cart.Remove(tempBtnDeleteFromCart.Tag as Product);
+                UpdateCartTotals(cart);
                 panelCart.Controls.Remove(tempItemPanel);
             };
 
@@ -204,22 +210,21 @@ namespace School_Pourchases
                     try
                     {
                         // Получаем данные для экспорта (пример)
-                        
+
                         // Создаем CSV содержимое
                         StringBuilder csvContent = new StringBuilder();
 
                         // Добавляем заголовки (пример)
-                        csvContent.AppendLine("Товар\tОписание\tПримерная цена руб.\tКоличество\tВсего руб.");
+                        csvContent.AppendLine("Товар\tПримерная цена руб.\tКоличество\tВсего руб.");
 
                         // Добавляем данные
-                        foreach (KeyValuePair<Product,int> itemInfo in parentContainer.User.Cart)
+                        foreach (KeyValuePair<Product, int> itemInfo in cartOnSaving)
                         {
                             // Экранируем специальные символы и формируем строку
-                            csvContent.AppendLine($"{itemInfo.Key.Name}\t"+
-                                $"{itemInfo.Key.Description}\t"+
-                                $"{itemInfo.Key.Price}\t"+
-                                $"{itemInfo.Value}\t"+
-                                $"{itemInfo.Value*itemInfo.Key.Price}");
+                            csvContent.AppendLine($"{itemInfo.Key.Name}\t" +
+                                $"{itemInfo.Key.Price}\t" +
+                                $"{itemInfo.Value}\t" +
+                                $"{itemInfo.Value * itemInfo.Key.Price}");
                         }
                         csvContent.AppendLine($"Итого руб.\t{parentContainer.totalCost}");
                         // Записываем в файл
@@ -235,6 +240,21 @@ namespace School_Pourchases
                     }
                 }
             }
+        }
+
+        private void rbOwnCart_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbOwnCart.Checked)
+            {
+                LoadItems(parentContainer.User.Cart);
+                cartOnSaving=parentContainer.User.Cart;
+            }
+            else
+            {
+                LoadItems(parentContainer.User.RequiredCart);
+                cartOnSaving = parentContainer.User.RequiredCart;
+            }
+            UpdateCartTotals(rbOwnCart.Checked ? parentContainer.User.Cart : parentContainer.User.RequiredCart);
         }
     }
 }

@@ -256,6 +256,7 @@ namespace School_Pourchases
             UpdateCartTotals();
             (((Control)sender) as Button).Text = "Добавить";
             (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);
+            (((Control)sender) as Button).FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
             (((Control)sender) as Button).BackColor = Color.Wheat;
             (((Control)sender) as Button).Click -= tempBtnAddToCartDelete_Click;
             (((Control)sender) as Button).Click += tempBtnAddToCart_Click;
