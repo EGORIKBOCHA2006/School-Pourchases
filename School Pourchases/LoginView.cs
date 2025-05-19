@@ -22,8 +22,9 @@ namespace School_Pourchases
             typeSchoolCb.SelectedIndex = 1;
         }
 
-        public static void CloseLogining(Container parent)
+        private async Task CloseLogining(Container parent)
         {
+            await GetRequiredItems();
             parent.contentPanel.Controls.Clear();
             parent.contentPanel.Dock = DockStyle.Right;
             parent.menuPanel.Visible = true;
@@ -33,10 +34,48 @@ namespace School_Pourchases
             parent.contentPanel.Controls.Add(componentsView);
 
         }
+        private async Task GetRequiredItems()
+        {
+
+            try
+            {
+                await parentContainer.sqlConnection.OpenAsync();
+                SqlParameter typeSchoolParameter = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
+                typeSchoolParameter.Value = parentContainer.User.TypeSchool;
+                string command = "SELECT CommonItems.name, CommonItems.cost, CommonItems.description, " +
+                        "CommonItems.imageSource, RequiredItems.count, CommonItems.id " +
+                        "FROM CommonItems, RequiredItems " +
+                        "WHERE CommonItems.id = RequiredItems.idItem " +
+                        "AND RequiredItems.typeSchool = @typeSchool";
+                SqlCommand sqlCommand = new SqlCommand(command, parentContainer.sqlConnection);
+                sqlCommand.Parameters.Add(typeSchoolParameter);
+                using (SqlDataReader reader = await sqlCommand.ExecuteReaderAsync())
+                {
+           
+                    while (reader.Read())
+                    {
+
+                        parentContainer.User.RequiredCart.Add(new Production.Product(reader.GetString(0), reader.GetDecimal(1))
+                        { Description = reader.GetString(2), ImageSource = reader.GetString(3), Id=reader.GetInt32(5) }, reader.GetInt32(4));
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                parentContainer.sqlConnection.Close();
+
+            }
+            
+        }
 
         private async void Login_Click(object sender, EventArgs e)
         {
-            parentContainer.user = new Models.User(0, "DEV", "DEV", "DEV", "DEV");
+            parentContainer.User = new Models.User(0, "DEV", "DEV", 1, "DEV");
             CloseLogining(parentContainer);
             return;
             if (schoolTb.Text != "" && responsibleTb.Text != "" && passwordTb.Text != "")
@@ -62,8 +101,9 @@ namespace School_Pourchases
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        parentContainer.user = new Models.User((int)reader[0], reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
-                        MessageBox.Show(parentContainer.user.TypeSchool + parentContainer.user.TypeUser + parentContainer.user.UserId + parentContainer.user.SchoolName + parentContainer.user.UserName);
+                        
+                        parentContainer.User = new Models.User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetString(4));
+                        MessageBox.Show(parentContainer.User.TypeSchool + parentContainer.User.TypeUser + parentContainer.User.UserId + parentContainer.User.SchoolName + parentContainer.User.UserName);
                         CloseLogining(parentContainer);
                     }
                     else
@@ -129,7 +169,7 @@ namespace School_Pourchases
                             sqlCommand.CommandText = "select id from Users where name=@responsible and password=@password";
                             reader = sqlCommand.ExecuteReader();
                             reader.Read();
-                            parentContainer.user = new Models.User((int)reader[0], responsibleRegTb.Text, schoolNameRegTb.Text, typeSchoolCb.Text, "Пользователь");
+                            parentContainer.User = new Models.User((int)reader[0], responsibleRegTb.Text, schoolNameRegTb.Text, typeSchoolCb.SelectedIndex+1, "Пользователь");
                             sqlConnection.Close();
                             CloseLogining(parentContainer);
 
@@ -151,7 +191,7 @@ namespace School_Pourchases
                             sqlCommand.CommandText = "select id from Users where name=@responsible and password=@password";
                             reader = sqlCommand.ExecuteReader();
                             reader.Read();
-                            parentContainer.user = new Models.User((int)reader[0], responsibleRegTb.Text, schoolNameRegTb.Text, typeSchoolCb.Text, "Пользователь");
+                            parentContainer.User = new Models.User((int)reader[0], responsibleRegTb.Text, schoolNameRegTb.Text, typeSchoolCb.SelectedIndex+1, "Пользователь");
                             reader.Close();
                             sqlConnection.Close();
                             CloseLogining(parentContainer);

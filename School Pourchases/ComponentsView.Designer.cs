@@ -53,7 +53,7 @@
             sortTypeCb.BackColor = Color.White;
             sortTypeCb.DropDownStyle = ComboBoxStyle.DropDownList;
             sortTypeCb.FormattingEnabled = true;
-            sortTypeCb.Items.AddRange(new object[] { "Монитор", "Процессор", "Все товары" });
+            sortTypeCb.Items.AddRange(new object[] { "Монитор", "Системный блок", "Электронная доска", "Проектор", "Планшет", "Наглядное пособие", "Ноутбук", "VR шлем", "Принтер", "Система видеонаблюдения", "Генератор", "Wi-Fi роутер", "3D принтер", "Турникеты", "Все товары" });
             sortTypeCb.Location = new Point(74, 5);
             sortTypeCb.Name = "sortTypeCb";
             sortTypeCb.Size = new Size(152, 23);
@@ -115,7 +115,7 @@
             panel3.Controls.Add(OrderByCb);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(sortTypeCb);
-            panel3.Location = new Point(338, 71);
+            panel3.Location = new Point(367, 67);
             panel3.Name = "panel3";
             panel3.Size = new Size(231, 68);
             panel3.TabIndex = 8;
@@ -177,9 +177,9 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(lblCost);
             panel1.Controls.Add(lblCountItems);
-            panel1.Location = new Point(17, 71);
+            panel1.Location = new Point(17, 67);
             panel1.Name = "panel1";
-            panel1.Size = new Size(302, 68);
+            panel1.Size = new Size(331, 68);
             panel1.TabIndex = 9;
             // 
             // label5

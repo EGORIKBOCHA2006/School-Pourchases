@@ -13,12 +13,12 @@ namespace School_Pourchases.Models
         public int UserId { get; set; }
         public string TypeUser { get; set; }
         public string UserName { get; set; }
-        public string TypeSchool { get; set; }
+        public int TypeSchool { get; set; }
+        
+        public Dictionary<Product, int> Cart = new Dictionary<Product, int>();
+        public Dictionary<Product, int> RequiredCart = new Dictionary<Product, int>();
 
-        public Dictionary<Product, int> cart = new Dictionary<Product, int>();
-
-
-        public User(int userId, string userName, string schoolName, string typeSchool, string typeUser )
+        public User(int userId, string userName, string schoolName, int typeSchool, string typeUser )
         {
             UserId = userId;
             UserName = userName;
