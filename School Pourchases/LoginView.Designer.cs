@@ -32,7 +32,7 @@
             tabControl1 = new TabControl();
             LoginPage = new TabPage();
             loginBtn = new Button();
-            passwordTb = new TextBox();
+            passwordTb = new MaskedTextBox();
             responsibleTb = new TextBox();
             schoolTb = new TextBox();
             label2 = new Label();
@@ -77,7 +77,7 @@
             // 
             // LoginPage
             // 
-            LoginPage.BackColor = SystemColors.ControlLightLight;
+            LoginPage.BackColor = Color.PapayaWhip;
             LoginPage.Controls.Add(loginBtn);
             LoginPage.Controls.Add(passwordTb);
             LoginPage.Controls.Add(responsibleTb);
@@ -94,7 +94,7 @@
             // 
             // loginBtn
             // 
-            loginBtn.BackColor = Color.FromArgb(255, 128, 0);
+            loginBtn.BackColor = Color.Wheat;
             loginBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
             loginBtn.FlatStyle = FlatStyle.Flat;
             loginBtn.Location = new Point(11, 176);
@@ -109,6 +109,7 @@
             // 
             passwordTb.Location = new Point(158, 113);
             passwordTb.Name = "passwordTb";
+            passwordTb.PasswordChar = '*';
             passwordTb.Size = new Size(202, 23);
             passwordTb.TabIndex = 3;
             // 
@@ -240,7 +241,7 @@
             // 
             // registerBtn
             // 
-            registerBtn.BackColor = Color.FromArgb(255, 128, 0);
+            registerBtn.BackColor = Color.Wheat;
             registerBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
             registerBtn.FlatStyle = FlatStyle.Flat;
             registerBtn.Location = new Point(11, 193);
@@ -255,7 +256,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.HighlightText;
+            BackColor = Color.OldLace;
             Controls.Add(panel1);
             Name = "LoginView";
             Size = new Size(1156, 601);
@@ -275,7 +276,7 @@
         private TabPage LoginPage;
         private TabPage RegisterPage;
         private Button loginBtn;
-        private TextBox passwordTb;
+        private MaskedTextBox passwordTb;
         private TextBox schoolTb;
         private Label label2;
         private Label label1;

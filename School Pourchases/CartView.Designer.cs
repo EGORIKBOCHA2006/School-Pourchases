@@ -39,6 +39,7 @@
             panel2 = new Panel();
             rbRequiredCart = new RadioButton();
             rbOwnCart = new RadioButton();
+            btnRefreshRequired = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -124,7 +125,7 @@
             btnMakeCsvFile.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 225, 192);
             btnMakeCsvFile.FlatStyle = FlatStyle.Flat;
             btnMakeCsvFile.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnMakeCsvFile.Location = new Point(677, 100);
+            btnMakeCsvFile.Location = new Point(677, 96);
             btnMakeCsvFile.Name = "btnMakeCsvFile";
             btnMakeCsvFile.Size = new Size(331, 39);
             btnMakeCsvFile.TabIndex = 13;
@@ -136,11 +137,12 @@
             // 
             panel2.BackColor = Color.PapayaWhip;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btnRefreshRequired);
             panel2.Controls.Add(rbRequiredCart);
             panel2.Controls.Add(rbOwnCart);
             panel2.Location = new Point(367, 67);
             panel2.Name = "panel2";
-            panel2.Size = new Size(231, 68);
+            panel2.Size = new Size(304, 68);
             panel2.TabIndex = 13;
             // 
             // rbRequiredCart
@@ -165,6 +167,21 @@
             rbOwnCart.Text = "Моя корзна";
             rbOwnCart.UseVisualStyleBackColor = true;
             rbOwnCart.CheckedChanged += rbOwnCart_CheckedChanged;
+            // 
+            // btnRefreshRequired
+            // 
+            btnRefreshRequired.BackColor = Color.Wheat;
+            btnRefreshRequired.FlatAppearance.BorderColor = Color.FromArgb(255, 192, 128);
+            btnRefreshRequired.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 128);
+            btnRefreshRequired.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 225, 192);
+            btnRefreshRequired.FlatStyle = FlatStyle.Flat;
+            btnRefreshRequired.Location = new Point(216, 36);
+            btnRefreshRequired.Name = "btnRefreshRequired";
+            btnRefreshRequired.Size = new Size(75, 23);
+            btnRefreshRequired.TabIndex = 1;
+            btnRefreshRequired.Text = "Обновить";
+            btnRefreshRequired.UseVisualStyleBackColor = false;
+            btnRefreshRequired.Click += btnRefreshRequired_Click;
             // 
             // CartView
             // 
@@ -198,5 +215,6 @@
         private Panel panel2;
         private RadioButton rbRequiredCart;
         private RadioButton rbOwnCart;
+        private Button btnRefreshRequired;
     }
 }

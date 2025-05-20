@@ -23,7 +23,7 @@ namespace School_Pourchases
             LoginView loginView = new LoginView(this);
             loginView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(loginView);
-            
+
 
         }
 
@@ -33,7 +33,7 @@ namespace School_Pourchases
             ComponentsView componentsView = new ComponentsView(this);
             componentsView.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(componentsView);
-            
+
         }
 
         private void cartBtn_Click(object sender, EventArgs e)
@@ -44,6 +44,50 @@ namespace School_Pourchases
             contentPanel.Controls.Add(componentsView);
         }
 
-        
+        private void profileBtn_Click(object sender, EventArgs e)
+        {
+            contentPanel.Controls.Clear();
+            ProfileView componentsView = new ProfileView(this);
+            componentsView.Dock = DockStyle.Fill;
+            contentPanel.Controls.Add(componentsView);
+        }
+        public async Task GetRequiredItems()
+        {
+            User.RequiredCart.Clear();
+            try
+            {
+                await sqlConnection.OpenAsync();
+                SqlParameter typeSchoolParameter = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
+                typeSchoolParameter.Value = User.TypeSchool;
+                string command = "SELECT CommonItems.name, CommonItems.cost, CommonItems.description, " +
+                        "CommonItems.imageSource, RequiredItems.count, CommonItems.id " +
+                        "FROM CommonItems, RequiredItems " +
+                        "WHERE CommonItems.id = RequiredItems.idItem " +
+                        "AND RequiredItems.typeSchool = @typeSchool";
+                SqlCommand sqlCommand = new SqlCommand(command, sqlConnection);
+                sqlCommand.Parameters.Add(typeSchoolParameter);
+                using (SqlDataReader reader = await sqlCommand.ExecuteReaderAsync())
+                {
+
+                    while (reader.Read())
+                    {
+
+                       User.RequiredCart.Add(new Production.Product(reader.GetString(0), reader.GetDecimal(1))
+                        { Description = reader.GetString(2), ImageSource = reader.GetString(3), Id = reader.GetInt32(5) }, reader.GetInt32(4));
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+            }
+
+        }
     }
 }

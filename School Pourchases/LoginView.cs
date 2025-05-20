@@ -24,7 +24,7 @@ namespace School_Pourchases
 
         private async Task CloseLogining(Container parent)
         {
-            await GetRequiredItems();
+            await parent.GetRequiredItems();
             parent.contentPanel.Controls.Clear();
             parent.contentPanel.Dock = DockStyle.Right;
             parent.menuPanel.Visible = true;
@@ -34,50 +34,49 @@ namespace School_Pourchases
             parent.contentPanel.Controls.Add(componentsView);
 
         }
-        private async Task GetRequiredItems()
-        {
+        //private async Task GetRequiredItems()
+        //{
 
-            try
-            {
-                await parentContainer.sqlConnection.OpenAsync();
-                SqlParameter typeSchoolParameter = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
-                typeSchoolParameter.Value = parentContainer.User.TypeSchool;
-                string command = "SELECT CommonItems.name, CommonItems.cost, CommonItems.description, " +
-                        "CommonItems.imageSource, RequiredItems.count, CommonItems.id " +
-                        "FROM CommonItems, RequiredItems " +
-                        "WHERE CommonItems.id = RequiredItems.idItem " +
-                        "AND RequiredItems.typeSchool = @typeSchool";
-                SqlCommand sqlCommand = new SqlCommand(command, parentContainer.sqlConnection);
-                sqlCommand.Parameters.Add(typeSchoolParameter);
-                using (SqlDataReader reader = await sqlCommand.ExecuteReaderAsync())
-                {
+        //    try
+        //    {
+        //        await parentContainer.sqlConnection.OpenAsync();
+        //        SqlParameter typeSchoolParameter = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
+        //        typeSchoolParameter.Value = parentContainer.User.TypeSchool;
+        //        string command = "SELECT CommonItems.name, CommonItems.cost, CommonItems.description, " +
+        //                "CommonItems.imageSource, RequiredItems.count, CommonItems.id " +
+        //                "FROM CommonItems, RequiredItems " +
+        //                "WHERE CommonItems.id = RequiredItems.idItem " +
+        //                "AND RequiredItems.typeSchool = @typeSchool";
+        //        SqlCommand sqlCommand = new SqlCommand(command, parentContainer.sqlConnection);
+        //        sqlCommand.Parameters.Add(typeSchoolParameter);
+        //        using (SqlDataReader reader = await sqlCommand.ExecuteReaderAsync())
+        //        {
            
-                    while (reader.Read())
-                    {
+        //            while (reader.Read())
+        //            {
 
-                        parentContainer.User.RequiredCart.Add(new Production.Product(reader.GetString(0), reader.GetDecimal(1))
-                        { Description = reader.GetString(2), ImageSource = reader.GetString(3), Id=reader.GetInt32(5) }, reader.GetInt32(4));
-                    }
-                }
+        //                parentContainer.User.RequiredCart.Add(new Production.Product(reader.GetString(0), reader.GetDecimal(1))
+        //                { Description = reader.GetString(2), ImageSource = reader.GetString(3), Id=reader.GetInt32(5) }, reader.GetInt32(4));
+        //            }
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                parentContainer.sqlConnection.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        parentContainer.sqlConnection.Close();
 
-            }
+        //    }
             
-        }
+        //}
 
         private async void Login_Click(object sender, EventArgs e)
         {
-            parentContainer.User = new Models.User(0, "DEV", "DEV", 1, "DEV");
-            CloseLogining(parentContainer);
-            return;
+            
+            
             if (schoolTb.Text != "" && responsibleTb.Text != "" && passwordTb.Text != "")
             {
 
@@ -95,7 +94,7 @@ namespace School_Pourchases
                     sqlCommand.Parameters.Add(sqlParameterSchool);
                     sqlCommand.Parameters.Add(sqlParameterPassword);
                     sqlCommand.Parameters.Add(sqlParameterResponsible);
-                    sqlCommand.CommandText = "select Users.id, Users.name , Schools.name, TypesSchool.name, TypesUser.name\r\nfrom Users,Schools, TypesSchool, TypesUser\r\nwhere Users.name=@responsible and Users.password=@password and Schools.name=@nameSchool and Users.schoolId=Schools.id and TypesUser.id=Users.typeUser and Schools.typeId=TypesSchool.id\r\n";
+                    sqlCommand.CommandText = "select Users.id, Users.name , Schools.name, TypesSchool.id, TypesUser.name\r\nfrom Users,Schools, TypesSchool, TypesUser\r\nwhere Users.name=@responsible and Users.password=@password and Schools.name=@nameSchool and Users.schoolId=Schools.id and TypesUser.id=Users.typeUser and Schools.typeId=TypesSchool.id\r\n";
                     SqlDataReader reader = sqlCommand.ExecuteReader();
 
                     if (reader.HasRows)

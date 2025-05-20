@@ -70,6 +70,7 @@
             profileBtn.SizeMode = PictureBoxSizeMode.Zoom;
             profileBtn.TabIndex = 0;
             profileBtn.TabStop = false;
+            profileBtn.Click += profileBtn_Click;
             // 
             // cartBtn
             // 
