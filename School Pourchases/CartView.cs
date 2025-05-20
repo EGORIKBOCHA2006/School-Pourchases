@@ -22,30 +22,30 @@ namespace School_Pourchases
             this.parentContainer = parentContainer;
             cartOnSaving = this.parentContainer.User.Cart;
 
-            UpdateCartTotals(parentContainer.User.Cart.Count>0? parentContainer.User.Cart : parentContainer.User.RequiredCart);
-            if (parentContainer.User.Cart.Count==0)
+            UpdateCartTotals(parentContainer.User.Cart.Count > 0 ? parentContainer.User.Cart : parentContainer.User.RequiredCart);
+            if (parentContainer.User.Cart.Count == 0)
             {
                 rbRequiredCart.Checked = true;
             }
-            LoadItems(parentContainer.User.Cart.Count>0?parentContainer.User.Cart:parentContainer.User.RequiredCart);
+            LoadItems(parentContainer.User.Cart.Count > 0 ? parentContainer.User.Cart : parentContainer.User.RequiredCart);
         }
-        private  void LoadItems(Dictionary<Product,int> itemDictinary)
+        private void LoadItems(Dictionary<Product, int> itemDictinary)
         {
             panelCart.Controls.Clear();
             foreach (var product in itemDictinary)
             {
-                PrintItem(product,itemDictinary);
+                PrintItem(product, itemDictinary);
 
             }
         }
 
-        private void UpdateCartTotals(Dictionary<Product,int> cart)
+        private void UpdateCartTotals(Dictionary<Product, int> cart)
         {
             parentContainer.productCount = cart.Sum(x => x.Value);
             parentContainer.totalCost = cart.Sum(x => x.Key.Price * x.Value);
             lblCost.Text = parentContainer.totalCost.ToString();
             lblCountItems.Text = parentContainer.productCount.ToString();
-            
+
             if (cart.Count == 0)
             {
                 label3.Text = "Корзина пуста";
@@ -58,7 +58,7 @@ namespace School_Pourchases
             }
         }
 
-        private void PrintItem(KeyValuePair<Product, int> product, Dictionary<Product,int> cart) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
+        private void PrintItem(KeyValuePair<Product, int> product, Dictionary<Product, int> cart) //НАДО РЕШИТЬ ЧЕРЕЗ ЧТО ОБЪЕКТЫ СЕРЕАЛИЗИРОВАТЬ И НАДО ЛИ
         {
 
             Panel tempItemPanel = new Panel
@@ -247,7 +247,7 @@ namespace School_Pourchases
             if (rbOwnCart.Checked)
             {
                 LoadItems(parentContainer.User.Cart);
-                cartOnSaving=parentContainer.User.Cart;
+                cartOnSaving = parentContainer.User.Cart;
             }
             else
             {
@@ -255,6 +255,14 @@ namespace School_Pourchases
                 cartOnSaving = parentContainer.User.RequiredCart;
             }
             UpdateCartTotals(rbOwnCart.Checked ? parentContainer.User.Cart : parentContainer.User.RequiredCart);
+        }
+
+        private async void btnRefreshRequired_Click(object sender, EventArgs e)
+        {
+            await parentContainer.GetRequiredItems();
+            LoadItems(parentContainer.User.RequiredCart);
+            UpdateCartTotals(parentContainer.User.RequiredCart);
+            rbRequiredCart.Checked = true;
         }
     }
 }
