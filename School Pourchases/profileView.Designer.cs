@@ -38,6 +38,7 @@
             responsibleRegTb = new TextBox();
             label4 = new Label();
             label3 = new Label();
+            label1 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -139,11 +140,21 @@
             label3.Text = "Пароль";
             label3.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(9, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(141, 37);
+            label1.TabIndex = 11;
+            label1.Text = "Настройки профиля";
+            // 
             // ProfileView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.OldLace;
+            Controls.Add(label1);
             Controls.Add(panel1);
             Name = "ProfileView";
             Size = new Size(1011, 562);
@@ -166,5 +177,6 @@
         private Label label4;
         private Label label3;
         private Panel panel3;
+        private Label label1;
     }
 }

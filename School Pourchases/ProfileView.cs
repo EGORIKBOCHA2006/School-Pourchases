@@ -18,6 +18,9 @@ namespace School_Pourchases
         {
             InitializeComponent();
             this.parentContainer = parentContainer;
+            responsibleRegTb.Text = parentContainer.User.UserName;
+            typeSchoolCb.SelectedIndex=parentContainer.User.TypeSchool-1;
+            
         }
 
         private async void registerBtn_Click(object sender, EventArgs e)

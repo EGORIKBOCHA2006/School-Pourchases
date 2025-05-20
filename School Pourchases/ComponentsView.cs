@@ -17,19 +17,12 @@ namespace School_Pourchases
 {
     public partial class ComponentsView : UserControl
     {
-
         private int selectedIndexOrderBy = 0;
         private int selectedTextSortType=0;
-        
-            
-
         private List<Product> GetProductsFromDatabase()
         {
             List<Product> products = new List<Product>();
-
-
             parentContainer.sqlConnection.Open();
-
             string orderBystring = " ";
             string sortByString = " and TypesProducts.Id=@Type";
             switch (selectedIndexOrderBy)
@@ -44,10 +37,8 @@ namespace School_Pourchases
                     break;
             }
             SqlParameter sortByParametr = new SqlParameter("@Type", System.Data.SqlDbType.Int);
-
             SqlCommand command = new SqlCommand("SELECT CommonItems.Id, CommonItems.name, typeId, cost,  description, imageSource, TypesProducts.name FROM CommonItems, TypesProducts where TypesProducts.id=typeId  " + ((selectedTextSortType == sortTypeCb.Items.Count) ? " " : sortByString + " ") + orderBystring, parentContainer.sqlConnection);
             command.Parameters.Add(sortByParametr);
-
             sortByParametr.Value = selectedTextSortType;
             using (var reader = command.ExecuteReader())
             {
@@ -57,26 +48,18 @@ namespace School_Pourchases
 
                 }
             }
-
             parentContainer.sqlConnection.Close();
-
             return products;
         }
-
         private async Task LoadItemsAsync()
         {
             panelCatalog.Controls.Clear();
             var products = await Task.Run(() => GetProductsFromDatabase());
-
             foreach (var product in products)
             {
                 PrintItem(product);
-
             }
-        }
-
-
-      
+        }      
         private void UpdateCartTotals()
         {
             parentContainer.productCount = parentContainer.User.Cart.Sum(x => x.Value);
@@ -84,10 +67,9 @@ namespace School_Pourchases
             lblCost.Text = parentContainer.totalCost.ToString();
             lblCountItems.Text = parentContainer.productCount.ToString();
         }
-
         private void PrintItem(Product product)
         {
-            // Основная панель товара (сохраняем оригинальное название tempItemPanel)
+            // Основная панель товара 
             Panel itemPanel = new Panel
             {
                 BackColor = Color.FromArgb(251, 255, 191),
@@ -96,8 +78,7 @@ namespace School_Pourchases
                 Size = new Size(970, 229),
                 Padding = new Padding(5)
             };
-
-            // Картинка товара (tempPictureItem)
+            // Картинка товара
             PictureBox pictureItem = new PictureBox
             {
                 ImageLocation = product.ImageSource,
@@ -107,8 +88,7 @@ namespace School_Pourchases
                 SizeMode = PictureBoxSizeMode.Zoom,
                 BorderStyle = BorderStyle.FixedSingle
             };
-
-            // Панель с основной информацией (tempPanel3)
+            // Панель с основной информацией
             Panel infoPanel = new Panel
             {
                 BackColor = Color.Khaki,
@@ -117,8 +97,7 @@ namespace School_Pourchases
                 Size = new Size(170, 140),
                 Padding = new Padding(5)
             };
-
-            // Название товара (tempLblNameItem)
+            // Название товара
             Label lblNameItem = new Label
             {
                 Text = product.Name,
@@ -128,7 +107,7 @@ namespace School_Pourchases
                 TextAlign = ContentAlignment.MiddleLeft
             };
 
-            // Цена товара (tempLblCostItem)
+            // Цена товара
             Label lblCostItem = new Label
             {
                 Text = $"{product.Price} руб.",
@@ -138,8 +117,7 @@ namespace School_Pourchases
                 ForeColor = Color.DarkGreen,
                 TextAlign = ContentAlignment.MiddleLeft
             };
-
-            // Панель с описанием (tempPanel2)
+            // Панель с описанием
             Panel descPanel = new Panel
             {
                 BackColor = Color.Khaki,
@@ -148,8 +126,7 @@ namespace School_Pourchases
                 Size = new Size(600, 140),
                 Padding = new Padding(5)
             };
-
-            // Описание товара (tempLblDescriptionItem)
+            // Описание товара
             RichTextBox lblDescriptionItem = new RichTextBox
             {
                 Text = product.Description,
@@ -160,7 +137,7 @@ namespace School_Pourchases
                 Padding = new Padding(5)
             };
 
-            // Кнопка добавления/удаления (tempBtnAddToCart)
+            // Кнопка добавления/удаления
             Button btnAddToCart = new Button
             {
                 Font = new Font("Segoe UI", 12F),
@@ -222,15 +199,11 @@ namespace School_Pourchases
             sortTypeCb.SelectedIndexChanged += sortTypeCb_SelectedIndexChanged;
 
         }
-
         private async void sortTypeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedTextSortType = sortTypeCb.SelectedIndex+1;
-            
+            selectedTextSortType = sortTypeCb.SelectedIndex+1;         
             await LoadItemsAsync();
-
         }
-
         private async void OrderByCb_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedIndexOrderBy = OrderByCb.SelectedIndex;
@@ -238,11 +211,13 @@ namespace School_Pourchases
         }
         private void tempBtnAddToCart_Click(object sender, EventArgs e)
         {
+            //Достаем товар из tag 
             Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.User.Cart.Add(product, 1);
             MessageBox.Show("Товар добавлен в корзину");
             UpdateCartTotals();
-            (((Control)sender) as Button).Text = "Удалить";
+            //Явно преобразуем sende к Button
+            (((Control)sender) as Button).Text = "Удалить"; 
             (((Control)sender) as Button).BackColor = Color.LightGreen;
             (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.Red;
             (((Control)sender) as Button).Click -= tempBtnAddToCart_Click;

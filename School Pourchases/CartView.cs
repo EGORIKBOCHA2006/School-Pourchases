@@ -110,8 +110,9 @@ namespace School_Pourchases
                 Size = new Size(400, 140),
                 Padding = new Padding(5)
             };
-            Label tempLblDescriptionItem = new Label
+            RichTextBox tempLblDescriptionItem = new RichTextBox
             {
+                ReadOnly = true,
                 Text = product.Key.Description,
                 Font = new Font("Segoe UI", 11F),
                 Dock = DockStyle.Fill,

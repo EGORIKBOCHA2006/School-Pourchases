@@ -62,9 +62,7 @@ namespace School_Pourchases
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        
                         parentContainer.User = new Models.User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetString(4));
-                        MessageBox.Show(parentContainer.User.TypeSchool + parentContainer.User.TypeUser + parentContainer.User.UserId + parentContainer.User.SchoolName + parentContainer.User.UserName);
                         CloseLogining(parentContainer);
                     }
                     else
@@ -116,7 +114,7 @@ namespace School_Pourchases
                     else
                     {
                         reader.Close();
-                        sqlCommand.CommandText = "select id, name from schools where name=@nameSchool and typeId=@typeSchool";
+                        sqlCommand.CommandText = "select id, name from schools where name=@nameSchool";
                         reader = sqlCommand.ExecuteReader();
                         SqlParameter sqlParametrIdSchool = new SqlParameter("@schoolId", System.Data.SqlDbType.Int);
                         if (reader.HasRows)
@@ -135,7 +133,6 @@ namespace School_Pourchases
                             CloseLogining(parentContainer);
 
                         }
-
                         else
                         {
                             reader.Close();
@@ -169,9 +166,6 @@ namespace School_Pourchases
             {
                 MessageBox.Show("Заполните все поля!");
             }
-
-
-
         }
     }
 }

@@ -156,7 +156,7 @@
             // 
             // RegisterPage
             // 
-            RegisterPage.BackColor = SystemColors.ControlLightLight;
+            RegisterPage.BackColor = Color.PapayaWhip;
             RegisterPage.Controls.Add(typeSchoolCb);
             RegisterPage.Controls.Add(passwordRegTb);
             RegisterPage.Controls.Add(responsibleRegTb);
