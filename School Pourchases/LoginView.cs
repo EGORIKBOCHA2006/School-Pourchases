@@ -34,45 +34,7 @@ namespace School_Pourchases
             parent.contentPanel.Controls.Add(componentsView);
 
         }
-        //private async Task GetRequiredItems()
-        //{
-
-        //    try
-        //    {
-        //        await parentContainer.sqlConnection.OpenAsync();
-        //        SqlParameter typeSchoolParameter = new SqlParameter("@typeSchool", System.Data.SqlDbType.Int);
-        //        typeSchoolParameter.Value = parentContainer.User.TypeSchool;
-        //        string command = "SELECT CommonItems.name, CommonItems.cost, CommonItems.description, " +
-        //                "CommonItems.imageSource, RequiredItems.count, CommonItems.id " +
-        //                "FROM CommonItems, RequiredItems " +
-        //                "WHERE CommonItems.id = RequiredItems.idItem " +
-        //                "AND RequiredItems.typeSchool = @typeSchool";
-        //        SqlCommand sqlCommand = new SqlCommand(command, parentContainer.sqlConnection);
-        //        sqlCommand.Parameters.Add(typeSchoolParameter);
-        //        using (SqlDataReader reader = await sqlCommand.ExecuteReaderAsync())
-        //        {
-           
-        //            while (reader.Read())
-        //            {
-
-        //                parentContainer.User.RequiredCart.Add(new Production.Product(reader.GetString(0), reader.GetDecimal(1))
-        //                { Description = reader.GetString(2), ImageSource = reader.GetString(3), Id=reader.GetInt32(5) }, reader.GetInt32(4));
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        parentContainer.sqlConnection.Close();
-
-        //    }
-            
-        //}
-
+       
         private async void Login_Click(object sender, EventArgs e)
         {
             
