@@ -214,7 +214,6 @@ namespace School_Pourchases
             //Достаем товар из tag 
             Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.User.Cart.Add(product, 1);
-            MessageBox.Show("Товар добавлен в корзину");
             UpdateCartTotals();
             //Явно преобразуем sende к Button
             (((Control)sender) as Button).Text = "Удалить"; 
@@ -227,7 +226,6 @@ namespace School_Pourchases
         {
             Product product = (((Control)sender) as Button).Tag as Product;
             parentContainer.User.Cart.Remove(product);
-            MessageBox.Show("Товар удален из корзины");
             UpdateCartTotals();
             (((Control)sender) as Button).Text = "Добавить";
             (((Control)sender) as Button).FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 192);

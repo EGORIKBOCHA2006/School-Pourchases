@@ -145,7 +145,7 @@
             label1.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.Location = new Point(9, 0);
             label1.Name = "label1";
-            label1.Size = new Size(141, 37);
+            label1.Size = new Size(275, 37);
             label1.TabIndex = 11;
             label1.Text = "Настройки профиля";
             // 
