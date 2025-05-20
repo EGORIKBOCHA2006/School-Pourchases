@@ -95,7 +95,7 @@
             // loginBtn
             // 
             loginBtn.BackColor = Color.Wheat;
-            loginBtn.FlatAppearance.BorderColor = Color.FromArgb(26, 181, 255);
+            loginBtn.FlatAppearance.BorderColor = Color.Wheat;
             loginBtn.FlatStyle = FlatStyle.Flat;
             loginBtn.Location = new Point(11, 176);
             loginBtn.Name = "loginBtn";

@@ -29,6 +29,9 @@ namespace School_Pourchases
 
         private void catalogBtn_Click_1(object sender, EventArgs e)
         {
+            catalogBtn.BackColor = Color.FromArgb(255, 192, 128);
+            cartBtn.BackColor = Color.Wheat;
+            profileBtn.BackColor = Color.Wheat;
             contentPanel.Controls.Clear();
             ComponentsView componentsView = new ComponentsView(this);
             componentsView.Dock = DockStyle.Fill;
@@ -38,6 +41,9 @@ namespace School_Pourchases
 
         private void cartBtn_Click(object sender, EventArgs e)
         {
+            catalogBtn.BackColor = Color.Wheat;
+            cartBtn.BackColor = Color.FromArgb(255, 192, 128);
+            profileBtn.BackColor = Color.Wheat;
             contentPanel.Controls.Clear();
             CartView componentsView = new CartView(this);
             componentsView.Dock = DockStyle.Fill;
@@ -46,6 +52,9 @@ namespace School_Pourchases
 
         private void profileBtn_Click(object sender, EventArgs e)
         {
+            catalogBtn.BackColor = Color.Wheat;
+            cartBtn.BackColor = Color.Wheat;
+            profileBtn.BackColor = Color.FromArgb(255, 192, 128);
             contentPanel.Controls.Clear();
             ProfileView componentsView = new ProfileView(this);
             componentsView.Dock = DockStyle.Fill;
