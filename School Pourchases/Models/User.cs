@@ -17,7 +17,7 @@ namespace School_Pourchases.Models
         
         public Dictionary<Product, int> Cart = new Dictionary<Product, int>();
         public Dictionary<Product, int> RequiredCart = new Dictionary<Product, int>();
-
+        //Конструктор с первичным присвоением свойств
         public User(int userId, string userName, string schoolName, int typeSchool, string typeUser )
         {
             UserId = userId;

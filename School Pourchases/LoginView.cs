@@ -35,13 +35,10 @@ namespace School_Pourchases
 
         }
        
-        private async void Login_Click(object sender, EventArgs e)
-        {
-            
-            
+        private async void Login_Click(object sender, EventArgs e) //код события нажатия на кнопку входа
+        {        
             if (schoolTb.Text != "" && responsibleTb.Text != "" && passwordTb.Text != "")
             {
-
                 try
                 {
                     await sqlConnection.OpenAsync();
@@ -65,10 +62,8 @@ namespace School_Pourchases
                         parentContainer.User = new Models.User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetString(4));
                         CloseLogining(parentContainer);
                     }
-                    else
-                    {
-                        MessageBox.Show("Учетная запись не найдена");
-                    }
+                    else MessageBox.Show("Учетная запись не найдена");
+                    
                 }
                 catch (Exception ex)
                 {

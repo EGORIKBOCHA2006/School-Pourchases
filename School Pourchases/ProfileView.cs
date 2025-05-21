@@ -19,10 +19,8 @@ namespace School_Pourchases
             InitializeComponent();
             this.parentContainer = parentContainer;
             responsibleRegTb.Text = parentContainer.User.UserName;
-            typeSchoolCb.SelectedIndex=parentContainer.User.TypeSchool-1;
-            
+            typeSchoolCb.SelectedIndex=parentContainer.User.TypeSchool-1;           
         }
-
         private async void registerBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(responsibleRegTb.Text) ||
@@ -31,12 +29,8 @@ namespace School_Pourchases
             {
                 MessageBox.Show("Заполните все обязательные поля!");
                 return;
-            }
-
-           
-                
+            }              
                     await parentContainer.sqlConnection.OpenAsync();
-
             // Начинаем транзакцию для обеспечения целостности данных
             using (SqlTransaction transaction = parentContainer.sqlConnection.BeginTransaction())
             {
@@ -52,10 +46,8 @@ namespace School_Pourchases
 
                     using (SqlCommand schoolCmd = new SqlCommand(updateSchoolQuery, parentContainer.sqlConnection, transaction))
                     {
-
                         schoolCmd.Parameters.AddWithValue("@typeId", typeSchoolCb.SelectedIndex + 1);
                         schoolCmd.Parameters.AddWithValue("@schoolId", parentContainer.User.UserId);
-
                         await schoolCmd.ExecuteNonQueryAsync();
                     }
 
@@ -65,28 +57,20 @@ namespace School_Pourchases
                         SET name = @userName, 
                             password = @password 
                         WHERE id = @userId";
-
                     using (SqlCommand userCmd = new SqlCommand(updateUserQuery, parentContainer.sqlConnection, transaction))
                     {
                         userCmd.Parameters.AddWithValue("@userName", responsibleRegTb.Text);
                         userCmd.Parameters.AddWithValue("@password", passwordRegTb.Text);
                         userCmd.Parameters.AddWithValue("@userId", parentContainer.User.UserId);
-
                         await userCmd.ExecuteNonQueryAsync();
                     }
-
                     // Если все успешно - коммитим транзакцию
                     transaction.Commit();
-
                     // Обновляем данные в приложении
                     parentContainer.User.UserName = responsibleRegTb.Text;
                     parentContainer.User.TypeSchool = typeSchoolCb.SelectedIndex + 1;
-
-
                     MessageBox.Show("Данные успешно обновлены!");
-
                 }
-
                 catch (Exception ex)
                 {
                     // Откатываем транзакцию при ошибке
@@ -98,11 +82,7 @@ namespace School_Pourchases
                     parentContainer.sqlConnection.Close();
                     parentContainer.GetRequiredItems();
                 }
-
-            }
-                
-            
-            
+            }          
         }
     }
 }

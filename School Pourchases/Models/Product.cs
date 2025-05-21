@@ -2,74 +2,12 @@
 {
     public class Product
     {
-        private int _idType;
-
-        public int IdType
-        {
-            get { return _idType; }
-            set { _idType = value; }
-        }
-        private string _imageSource;
-
-        public string ImageSource
-        {
-            get { return _imageSource; }
-            set { _imageSource = value; }
-        }
-
-        private int _count;
-
-        public int Count
-        {
-            get { return _count; }
-            set { _count = value; }
-        }
-
-
-        private decimal _price;
-
-        public decimal Price
-        {
-            get { return _price; }
-            set { _price = value; }
-        }
-
-        private string? _name;
-
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (!String.IsNullOrWhiteSpace(value)) { _name = value; }
-                else
-                {
-                    _name = "N/D";
-                }
-            }
-        }
-        private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
-
-        private int _id;
-
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        virtual public void PrintInfo()
-        {
-            Console.WriteLine($"Товар: {Name}\nЦена: {Price}");
-        }
-
-
+        public int IdType { get; set; }
+        public string ImageSource { get; set; }
+        public decimal Price { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Id { get; set; }
         public Product(string name, decimal price)
         {
             Name = name;
@@ -87,6 +25,7 @@
         }
     }
 
+    /*
     public class Monitor : Product
     {
         private int _width;
@@ -126,5 +65,5 @@
         {
             Name = Name[0].ToString().ToUpper() + Name[1..].ToLower(); 
         }
-    }
+    }*/
 }
